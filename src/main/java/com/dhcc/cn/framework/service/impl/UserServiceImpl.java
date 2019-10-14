@@ -1,6 +1,5 @@
 package com.dhcc.cn.framework.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dhcc.cn.framework.annotation.DataSourceSwitch;
 import com.dhcc.cn.framework.enums.DBTypeEnum;
@@ -18,7 +17,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> {
 
     @DataSourceSwitch(DBTypeEnum.MYSQL)
     public User getUser(String name , String psw){
-        User user = mUserMapper.selectOne(new QueryWrapper<User>());
+        User user = mUserMapper.selectById(1);
         return user;
     }
 

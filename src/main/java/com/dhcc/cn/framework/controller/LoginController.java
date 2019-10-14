@@ -26,7 +26,7 @@ public class LoginController {
     @PostMapping("/login")
     @ResponseResultBody
     public UserInfo login(@Validated LoginForm loginForm) {
-        User user = mService.getUser(1);
+        User user = mService.getUser(loginForm.getName(),loginForm.getPsw());
         String token = jwtConfig.getToken(loginForm.getName() + loginForm.getPsw());
         UserInfo userInfo = new UserInfo() {{
             setUser(user);

@@ -35,10 +35,10 @@ public class DataSourceSwitchAspect {
             DbContextHolder.setDbType(DBTypeEnum.MYSQL);
         }else{
             switch (dataSourceSwitch.value().getValue()) {
-                case "db1":
+                case "mysql":
                     DbContextHolder.setDbType(DBTypeEnum.MYSQL);
                     break;
-                case "db2":
+                case "cache":
                     DbContextHolder.setDbType(DBTypeEnum.CACHE);
                     break;
                 default:
