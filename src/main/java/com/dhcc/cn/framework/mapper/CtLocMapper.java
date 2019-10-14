@@ -13,5 +13,5 @@ public interface CtLocMapper extends BaseMapper<CtLoc> {
 
     List<CtLoc> getAllCtLoc(@Param("type") String type);
 
-    void delete(@Param("id") String id);
+    CtLoc getCtLoc(@Param("id") int id);
 }

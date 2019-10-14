@@ -1,9 +1,15 @@
 package com.dhcc.cn.framework.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
+@TableName("CT_Loc")
 public class CtLoc {
 
   //CTLOC_RowID, CTLOC_Code, CTLOC_Desc , CTLOC_Address, CTLOC_Type
+  @TableField("CTLOC_RowID")
+  @TableId
   private long ctlocRowId;
 
   private String ctlocCode;
@@ -53,5 +59,17 @@ public class CtLoc {
 
   public void setCtlocType(String ctlocType) {
     this.ctlocType = ctlocType;
+  }
+
+
+  @Override
+  public String toString() {
+    return "CtLoc{" +
+            "ctlocRowId=" + ctlocRowId +
+            ", ctlocCode='" + ctlocCode + '\'' +
+            ", ctlocDesc='" + ctlocDesc + '\'' +
+            ", ctlocAddress='" + ctlocAddress + '\'' +
+            ", ctlocType='" + ctlocType + '\'' +
+            '}';
   }
 }

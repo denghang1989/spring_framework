@@ -20,14 +20,14 @@ public class CtLocController {
     @Autowired
     CtLocServiceImpl mService;
 
-    @GetMapping("/ctloc")
+    @GetMapping("/type")
     @ResponseResultBody
-    public List<CtLoc> login(String type) {
-        return mService.getCtLoc(type);
+    public List<CtLoc> getAllCtLoc(String type) {
+        return mService.getAllCtLoc(type);
     }
 
     @GetMapping("/{id}")
     public CtLoc getCtLoc(@PathVariable("id") int id){
-        return mService.getById(id);
+        return mService.getCtLoc(id);
     }
 }
