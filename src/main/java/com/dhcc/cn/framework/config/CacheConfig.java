@@ -1,6 +1,6 @@
 package com.dhcc.cn.framework.config;
 
-import com.intersys.jdbc.CacheXADataSource;
+import com.intersys.jdbc.CacheDataSource;
 
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ public class CacheConfig {
     private CacheParam mCacheParam ;
 
     public DataSource getDataSource () {
-        CacheXADataSource datasource = new CacheXADataSource();
+        CacheDataSource datasource = new CacheDataSource();
         try {
             datasource.setURL(mCacheParam.getUrl());
             datasource.setUser(mCacheParam.getUsername());

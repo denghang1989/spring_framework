@@ -5,7 +5,7 @@ import com.dhcc.cn.framework.dto.LoginForm;
 import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.UserInfo;
 import com.dhcc.cn.framework.pojo.User;
-import com.dhcc.cn.framework.service.impl.UserServiceImpl;
+import com.dhcc.cn.framework.service.mysql.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

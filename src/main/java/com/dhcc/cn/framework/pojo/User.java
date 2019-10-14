@@ -1,26 +1,47 @@
 package com.dhcc.cn.framework.pojo;
 
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
-import lombok.Data;
-
-@Data
-@TableName("user")
 public class User {
 
-    @TableId
-    private int id;
+  private long id;
+  private String name;
+  private String email;
+  private String address;
 
-    @TableField
-    private String name;
 
-    @TableField
-    private String email;
+  public long getId() {
+    return id;
+  }
 
-    @TableField
-    private String address;
+  public void setId(long id) {
+    this.id = id;
+  }
+
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
 }

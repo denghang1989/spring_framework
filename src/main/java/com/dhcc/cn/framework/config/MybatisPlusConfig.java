@@ -47,7 +47,7 @@ public class MybatisPlusConfig {
      * @return
      */
     @Bean
-    public DataSource multipleDataSource(@Qualifier("mysql") DataSource mysql,
+    public DynamicDataSource multipleDataSource(@Qualifier("mysql") DataSource mysql,
                                          @Qualifier("cache") DataSource cache) {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         Map<Object, Object> targetDataSources = new HashMap<>();

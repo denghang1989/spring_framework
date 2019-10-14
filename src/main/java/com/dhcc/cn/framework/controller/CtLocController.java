@@ -2,7 +2,7 @@ package com.dhcc.cn.framework.controller;
 
 import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.pojo.CtLoc;
-import com.dhcc.cn.framework.service.impl.CtLocServiceImpl;
+import com.dhcc.cn.framework.service.cache.CtLocServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
