@@ -27,6 +27,7 @@ public class CtLocController {
     }
 
     @GetMapping("/{id}")
+    @ResponseResultBody
     public CtLoc getCtLoc(@PathVariable("id") int id){
         return mService.getCtLoc(id);
     }
