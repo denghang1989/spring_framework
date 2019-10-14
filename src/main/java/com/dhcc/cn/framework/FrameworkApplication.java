@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.dhcc.cn.framework.dao.mapper")
+@MapperScan("com.dhcc.cn.framework.mapper")
 public class FrameworkApplication {
 
     public static void main(String[] args) {

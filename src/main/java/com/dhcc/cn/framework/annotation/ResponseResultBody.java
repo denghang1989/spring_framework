@@ -1,4 +1,4 @@
-package com.dhcc.cn.framework.dto.result;
+package com.dhcc.cn.framework.annotation;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 

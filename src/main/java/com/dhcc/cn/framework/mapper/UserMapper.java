@@ -1,4 +1,4 @@
-package com.dhcc.cn.framework.dao.mapper;
+package com.dhcc.cn.framework.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dhcc.cn.framework.pojo.User;

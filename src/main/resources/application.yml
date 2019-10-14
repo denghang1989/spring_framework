@@ -1,16 +1,21 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://106.54.238.125:3306/study?characterEncoding=utf-8&serverTimezone=GMT%2B8
-    username: root
-    password: denghang1989@163.com
-    type: com.alibaba.druid.pool.DruidDataSource
+    mysql:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://106.54.238.125:3306/study?characterEncoding=utf-8&serverTimezone=GMT%2B8
+      username: root
+      password: denghang1989@163.com
+      type: com.alibaba.druid.pool.DruidDataSource
+    cache:
+      driver-class-name: com.intersys.jdbc.CacheDriver
+      url: jdbc:Cache://192.168.199.134:1972/dhc-app
+      username: _system
+      password: sys
+      type: com.alibaba.druid.pool.DruidDataSource
   http:
     encoding:
       force: true
       charset: utf-8
-mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
 server:
   port: 8090
 config:

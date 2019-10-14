@@ -1,6 +1,6 @@
 package com.dhcc.cn.framework.config;
 
-import com.dhcc.cn.framework.dto.result.ResponseResultBody;
+import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.result.Result;
 
 import org.springframework.core.MethodParameter;

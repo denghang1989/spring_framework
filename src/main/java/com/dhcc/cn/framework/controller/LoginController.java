@@ -1,13 +1,13 @@
 package com.dhcc.cn.framework.controller;
 
 import com.dhcc.cn.framework.config.JwtConfig;
-import com.dhcc.cn.framework.dao.mapper.UserMapper;
 import com.dhcc.cn.framework.dto.LoginForm;
-import com.dhcc.cn.framework.dto.result.ResponseResultBody;
+import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.UserInfo;
 import com.dhcc.cn.framework.pojo.User;
+import com.dhcc.cn.framework.service.impl.UserServiceImpl;
 
-import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +20,13 @@ public class LoginController {
     @Resource
     private JwtConfig jwtConfig;
 
-    @Resource
-    UserMapper mMapper;
+    @Autowired
+    UserServiceImpl mService;
 
     @PostMapping("/login")
     @ResponseResultBody
     public UserInfo login(@Validated LoginForm loginForm) {
-        User user = mMapper.selectById(1);
+        User user = mService.getUser(1);
         String token = jwtConfig.getToken(loginForm.getName() + loginForm.getPsw());
         UserInfo userInfo = new UserInfo() {{
             setUser(user);
