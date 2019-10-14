@@ -6,6 +6,7 @@ import com.dhcc.cn.framework.service.impl.CtLocServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,5 +24,10 @@ public class CtLocController {
     @ResponseResultBody
     public List<CtLoc> login(String type) {
         return mService.getCtLoc(type);
+    }
+
+    @GetMapping("/{id}")
+    public CtLoc getCtLoc(@PathVariable("id") int id){
+        return mService.getById(id);
     }
 }
