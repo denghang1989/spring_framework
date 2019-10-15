@@ -1,5 +1,9 @@
 package com.dhcc.cn.framework.dto.emergency;
 
+
+import lombok.Data;
+
+@Data
 public class EmergencyPatientData {
     /*
     急诊内科

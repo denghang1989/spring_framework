@@ -1,4 +1,4 @@
-package com.dhcc.cn.framework.pojo;
+package com.dhcc.cn.framework.pojo.cache;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;

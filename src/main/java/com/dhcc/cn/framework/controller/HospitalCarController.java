@@ -1,10 +1,13 @@
 package com.dhcc.cn.framework.controller;
 
+import com.dhcc.cn.framework.dto.HospitalCarForm;
 import com.dhcc.cn.framework.dto.emergency.HospitalCarData;
 import com.dhcc.cn.framework.service.mysql.HospitalCarServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,13 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
  * 24小时院前出车人次
  */
 @RestController
+@RequestMapping("/HospitalCar")
 public class HospitalCarController {
 
     @Autowired
     HospitalCarServiceImpl mHCService;
 
-    @GetMapping("/HospitalCar")
+    @GetMapping("/date")
     public HospitalCarData getHospitalCar(String date){
         return mHCService.getHospitalCar(date);
     }
+
+    @PostMapping("/save")
+    public int save(HospitalCarForm form){
+        return mHCService.save(form);
+    }
+
 }

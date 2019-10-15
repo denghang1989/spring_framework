@@ -1,7 +1,7 @@
 package com.dhcc.cn.framework.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.dhcc.cn.framework.pojo.CtLoc;
+import com.dhcc.cn.framework.pojo.cache.CtLoc;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

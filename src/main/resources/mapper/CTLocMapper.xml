@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dhcc.cn.framework.mapper.CtLocMapper">
 
-    <resultMap id="Loc" type="com.dhcc.cn.framework.pojo.CtLoc">
+    <resultMap id="Loc" type="com.dhcc.cn.framework.pojo.cache.CtLoc">
         <id column="CTLOC_RowID" property="ctlocRowId"/>
         <result column="CTLOC_Code" property="ctlocCode"/>
         <result column="CTLOC_Address" property="ctlocAddress"/>

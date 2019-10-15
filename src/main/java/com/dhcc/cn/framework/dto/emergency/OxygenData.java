@@ -1,8 +1,11 @@
 package com.dhcc.cn.framework.dto.emergency;
 
+import lombok.Data;
+
 /**
  * 高压氧科
  */
+@Data
 public class OxygenData {
 /*
       高压氧舱数
