@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.cn.framework.mapper.EmergencyMapper">
+
+    <resultMap id="emergencyData" type="com.dhcc.cn.framework.dto.emergency.EmergencyData">
+
+    </resultMap>
+
+    <resultMap id="EICU" type="com.dhcc.cn.framework.dto.emergency.EICUData">
+
+    </resultMap>
+
+    <resultMap id="EmergencyPatient" type="com.dhcc.cn.framework.dto.emergency.EmergencyPatientData">
+
+    </resultMap>
+
+    <resultMap id="InjectData" type="com.dhcc.cn.framework.dto.emergency.InjectData">
+
+    </resultMap>
+
+    <select id="getEmergencyData" resultMap="emergencyData" parameterType="string" statementType="CALLABLE">
+        {call getUserById(#{date,mode=IN})}
+    </select>
+
+    <select id="getEICU" parameterType="string" resultMap="EICU" statementType="CALLABLE">
+		{call getUserById(#{id,mode=IN})}
+	</select>
+
+    <select id="getEmergencyPatient" parameterType="string" resultMap="EmergencyPatient" statementType="CALLABLE">
+		{call getUserById(#{id,mode=IN})}
+	</select>
+
+    <select id="getInjectData" parameterType="string" resultMap="InjectData" statementType="CALLABLE">
+		{call getUserById(#{id,mode=IN})}
+	</select>
+
+
+</mapper>
