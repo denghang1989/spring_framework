@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Emergency 急诊科数据
@@ -44,4 +46,15 @@ public class OxygenServiceImpl  {
         return mOxygenMapper.insert(oxygen);
     }
 
+    public List<OxygenData> getAll(String start, String end) {
+        QueryWrapper<Oxygen> wrapper = new QueryWrapper<>();
+        wrapper.between("date",start,end);
+        List<Oxygen> oxygens = mOxygenMapper.selectList(wrapper);
+        List<OxygenData> oxygenDataList = oxygens.stream().map(oxygen -> {
+            OxygenData oxygenData = new OxygenData();
+            BeanUtils.copyProperties(oxygen, oxygenData);
+            return oxygenData;
+        }).collect(Collectors.toList());
+        return oxygenDataList;
+    }
 }

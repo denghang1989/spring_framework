@@ -12,41 +12,41 @@ import lombok.Data;
 public class HospitalCar {
 
     @TableId
-    private long   rowId;
+    private long id;
 
     private String user;
 
-    private Date   date;
+    private Date date;
     /**
      * 本部派车
      */
-    private int item1;
+    private int  item1;
     /**
      * 23区派车
      */
-    private int item2;
+    private int  item2;
     /**
      * 病人直呼
      */
-    private int item3;
+    private int  item3;
     /**
      * 接病人
      */
-    private int item4;
+    private int  item4;
     /**
      * 送病人
      */
-    private int item5;
+    private int  item5;
     /**
      * 保健
      */
-    private int item6;
+    private int  item6;
     /**
      * 长途出车
      */
-    private int item7;
+    private int  item7;
 
-    private Date   createDate;
+    private Date createDate;
 
 
 }

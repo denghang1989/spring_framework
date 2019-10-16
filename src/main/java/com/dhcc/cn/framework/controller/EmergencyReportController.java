@@ -1,5 +1,6 @@
 package com.dhcc.cn.framework.controller;
 
+import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.emergency.EICUData;
 import com.dhcc.cn.framework.dto.emergency.EmergencyData;
 import com.dhcc.cn.framework.dto.emergency.EmergencyPatientData;
@@ -22,21 +23,25 @@ public class EmergencyReportController {
     EmergencyServiceImpl mEmergencyService;
 
     @GetMapping("/EICU")
+    @ResponseResultBody
     public EICUData getEICU(String date){
         return mEmergencyService.getEICU(date);
     }
 
     @GetMapping("/EmergencyData")
+    @ResponseResultBody
     public EmergencyData getEmergencyData(String date){
         return mEmergencyService.getEmergencyData(date);
     }
 
     @GetMapping("/EmergencyPatient")
+    @ResponseResultBody
     public EmergencyPatientData getEmergencyPatient(String date){
         return mEmergencyService.getEmergencyPatient(date);
     }
 
     @GetMapping("/InjectData")
+    @ResponseResultBody
     public InjectData getInjectData(String date){
         return mEmergencyService.getInjectData(date);
     }
