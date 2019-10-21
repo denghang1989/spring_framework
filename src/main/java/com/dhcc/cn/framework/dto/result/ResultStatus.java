@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public enum ResultStatus {
-    SUCCESS(HttpStatus.OK, 200, "成功"),
+    SUCCESS(HttpStatus.OK, 0, "成功"),
     BAD_REQUEST(HttpStatus.BAD_REQUEST, 400, "参数异常"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 500, "服务器异常");
 

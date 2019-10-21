@@ -19,6 +19,10 @@
 
     </resultMap>
 
+    <resultMap id="EmergencyWardData" type="com.dhcc.cn.framework.dto.emergency.EmergencyWardData">
+
+    </resultMap>
+
     <select id="getEmergencyData" resultMap="emergencyData" parameterType="string" statementType="CALLABLE">
         {call getUserById(#{date,mode=IN})}
     </select>
@@ -32,6 +36,10 @@
 	</select>
 
     <select id="getInjectData" parameterType="string" resultMap="InjectData" statementType="CALLABLE">
+		{call getUserById(#{id,mode=IN})}
+	</select>
+
+    <select id="getEmergencyWard" parameterType="string" resultMap="EmergencyWardData" statementType="CALLABLE">
 		{call getUserById(#{id,mode=IN})}
 	</select>
 

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -32,11 +31,14 @@ public class HospitalCarServiceImpl {
      * @desc 24小时院前出车人次
      */
     public HospitalCarData getHospitalCar(String date) {
-        HospitalCarData hospitalCarData = new HospitalCarData();
+        HospitalCarData hospitalCarData = null;
         QueryWrapper<HospitalCar> wrapper = new QueryWrapper<>();
-        wrapper.eq("date",date);
+        wrapper.eq("date", date);
         HospitalCar car = mHospitalCarMapper.selectOne(wrapper);
-        copyData(car, hospitalCarData);
+        if (car != null) {
+            hospitalCarData = new HospitalCarData();
+            copyData(car, hospitalCarData);
+        }
         return hospitalCarData;
     }
 
@@ -55,12 +57,12 @@ public class HospitalCarServiceImpl {
     /**
      * @param startDate
      * @param endDate
-     * @desc 获取一段时间的数据
      * @return
+     * @desc 获取一段时间的数据
      */
-    public List<HospitalCarData> getAll(String startDate,String endDate){
+    public List<HospitalCarData> getAll(String startDate, String endDate) {
         QueryWrapper<HospitalCar> wrapper = new QueryWrapper<>();
-        wrapper.between("date",startDate,endDate);
+        wrapper.between("date", startDate, endDate);
         List<HospitalCar> hospitalCars = mHospitalCarMapper.selectList(wrapper);
         List<HospitalCarData> hospitalCarData = hospitalCars.stream().map(car -> {
             HospitalCarData data = new HospitalCarData();

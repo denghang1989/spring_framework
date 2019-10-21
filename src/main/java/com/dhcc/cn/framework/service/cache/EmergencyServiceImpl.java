@@ -3,6 +3,7 @@ package com.dhcc.cn.framework.service.cache;
 import com.dhcc.cn.framework.dto.emergency.EICUData;
 import com.dhcc.cn.framework.dto.emergency.EmergencyData;
 import com.dhcc.cn.framework.dto.emergency.EmergencyPatientData;
+import com.dhcc.cn.framework.dto.emergency.EmergencyWardData;
 import com.dhcc.cn.framework.dto.emergency.InjectData;
 import com.dhcc.cn.framework.mapper.EmergencyMapper;
 
@@ -16,22 +17,34 @@ public class EmergencyServiceImpl {
     EmergencyMapper mEmergencyMapper;
 
     public EICUData getEICU(String date){
-        return new EICUData();
+//        EICUData eicuData = mEmergencyMapper.getEICU(date);
+        EICUData eicuData = new EICUData();
+        return eicuData;
     }
 
     public EmergencyData getEmergencyData(String date){
-        EmergencyData emergencyData = mEmergencyMapper.getEmergencyData(date);
+//        EmergencyData emergencyData = mEmergencyMapper.getEmergencyData(date);
+        EmergencyData emergencyData = new EmergencyData();
         return emergencyData;
     }
 
     public EmergencyPatientData getEmergencyPatient(String date){
-        return new EmergencyPatientData();
+//        EmergencyPatientData emergencyPatient = mEmergencyMapper.getEmergencyPatient(date);
+        EmergencyPatientData emergencyPatient = new EmergencyPatientData();
+        return emergencyPatient;
     }
 
 
     public InjectData getInjectData(String date){
-        return new InjectData();
+//        InjectData injectData = mEmergencyMapper.getInjectData(date);
+        InjectData injectData = new InjectData();
+        return injectData;
     }
 
 
+    public EmergencyWardData getEmergencyWard(String date) {
+        //        InjectData injectData = mEmergencyMapper.getInjectData(date);
+        EmergencyWardData emergencyWardData = new EmergencyWardData();
+        return emergencyWardData;
+    }
 }

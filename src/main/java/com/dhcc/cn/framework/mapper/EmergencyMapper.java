@@ -3,6 +3,7 @@ package com.dhcc.cn.framework.mapper;
 import com.dhcc.cn.framework.dto.emergency.EICUData;
 import com.dhcc.cn.framework.dto.emergency.EmergencyData;
 import com.dhcc.cn.framework.dto.emergency.EmergencyPatientData;
+import com.dhcc.cn.framework.dto.emergency.EmergencyWardData;
 import com.dhcc.cn.framework.dto.emergency.InjectData;
 
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,6 @@ public interface EmergencyMapper {
     EmergencyPatientData getEmergencyPatient(String date);
 
     InjectData getInjectData(String date);
+
+    EmergencyWardData getEmergencyWard(String date);
 }
