@@ -7,6 +7,7 @@ import com.dhcc.cn.framework.dto.emergency.EmergencyPatientData;
 import com.dhcc.cn.framework.dto.emergency.EmergencyWardData;
 import com.dhcc.cn.framework.dto.emergency.InjectData;
 import com.dhcc.cn.framework.service.cache.EmergencyServiceImpl;
+import com.github.abel533.echarts.Option;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,5 +50,18 @@ public class EmergencyReportController {
         return mEmergencyService.getEmergencyWard(date);
     }
 
+    @GetMapping("/weekEmergency")
+    public Option getWeekEmergency(String date){
+        return mEmergencyService.getWeekEmergency(date);
+    }
 
+    @GetMapping("/weekEmergencyWard")
+    public Option getWeekEmergencyWard(String date){
+        return mEmergencyService.getWeekEmergencyWard(date);
+    }
+
+    @GetMapping("/weekInject")
+    public Option getWeekInject(String date){
+        return mEmergencyService.getWeekInject(date);
+    }
 }

@@ -5,6 +5,7 @@ import com.dhcc.cn.framework.dto.HospitalCarForm;
 import com.dhcc.cn.framework.dto.emergency.HospitalCarData;
 import com.dhcc.cn.framework.mapper.HospitalCarMapper;
 import com.dhcc.cn.framework.pojo.mysql.HospitalCar;
+import com.github.abel533.echarts.Option;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,4 +78,8 @@ public class HospitalCarServiceImpl {
         BeanUtils.copyProperties(car, data);
     }
 
+    public Option getWeekHospitalCar(String date) {
+        Option option = new Option();
+        return option;
+    }
 }

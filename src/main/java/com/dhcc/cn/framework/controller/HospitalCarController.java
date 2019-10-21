@@ -4,6 +4,7 @@ import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.HospitalCarForm;
 import com.dhcc.cn.framework.dto.emergency.HospitalCarData;
 import com.dhcc.cn.framework.service.mysql.HospitalCarServiceImpl;
+import com.github.abel533.echarts.Option;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -20,27 +21,30 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/HospitalCar")
+@ResponseResultBody
 public class HospitalCarController {
 
     @Autowired
     HospitalCarServiceImpl mHCService;
 
     @GetMapping("/date")
-    @ResponseResultBody
     public HospitalCarData getHospitalCar(String date){
         return mHCService.getHospitalCar(date);
     }
 
     @PostMapping("/save")
-    @ResponseResultBody
     public int save(@Validated HospitalCarForm form){
         return mHCService.save(form);
     }
 
     @GetMapping("/all")
-    @ResponseResultBody
     public List<HospitalCarData> getAllByDate(String start,String end){
         return mHCService.getAll(start, end);
+    }
+
+    @GetMapping("/weekHospitalCar")
+    public Option getWeekHospitalCar(String date){
+        return mHCService.getWeekHospitalCar(date);
     }
 
 }
