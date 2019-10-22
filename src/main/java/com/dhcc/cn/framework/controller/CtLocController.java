@@ -15,19 +15,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/loc")
+@ResponseResultBody
 public class CtLocController {
 
     @Autowired
     CtLocServiceImpl mService;
 
     @GetMapping("/type")
-    @ResponseResultBody
     public List<CtLoc> getAllCtLoc(String type) {
         return mService.getAllCtLoc(type);
     }
 
     @GetMapping("/{id}")
-    @ResponseResultBody
     public CtLoc getCtLoc(@PathVariable("id") int id){
         return mService.getCtLoc(id);
     }
