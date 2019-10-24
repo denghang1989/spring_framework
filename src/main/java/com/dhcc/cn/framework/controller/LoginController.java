@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-import lombok.extern.log4j.Log4j;
 
 @RestController
 @ResponseResultBody
-@Log4j
 public class LoginController {
     @Resource
     private JwtConfig jwtConfig;

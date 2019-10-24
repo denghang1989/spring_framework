@@ -3,13 +3,15 @@ package com.dhcc.cn.framework.pojo.mysql;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
 @TableName("hospital_car")
-public class HospitalCar {
+public class HospitalCar implements Serializable {
 
     @TableId
     private long id;

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import lombok.extern.log4j.Log4j;
 
 /**
  * Emergency 急诊科数据
@@ -23,7 +22,6 @@ import lombok.extern.log4j.Log4j;
 @RestController
 @RequestMapping("Oxygen")
 @ResponseResultBody
-@Log4j
 public class OxygenController {
 
     @Autowired

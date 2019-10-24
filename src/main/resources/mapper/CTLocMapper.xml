@@ -11,12 +11,17 @@
         <result column="CTLOC_Type" property="ctlocType"/>
     </resultMap>
 
+    <sql id="column">
+        CTLOC_RowID, CTLOC_Code, CTLOC_Desc , CTLOC_Address, CTLOC_Type
+    </sql>
+
     <select id="getAllCtLoc" resultMap="Loc" parameterType="string">
-        SELECT CTLOC_RowID, CTLOC_Code, CTLOC_Desc , CTLOC_Address, CTLOC_Type  FROM CT_Loc where CTLOC_Type = #{type}
+        SELECT <include refid="column"/>  FROM CT_Loc where CTLOC_Type = #{type}
     </select>
 
     <select id="getCtLoc" parameterType="int" resultMap="Loc">
-        SELECT CTLOC_RowID, CTLOC_Code, CTLOC_Desc , CTLOC_Address, CTLOC_Type FROM CT_Loc WHERE CTLOC_RowID=#{id}
+        SELECT <include refid="column"/> FROM CT_Loc WHERE CTLOC_RowID=#{id}
     </select>
+
 
 </mapper>
