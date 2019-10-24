@@ -5,7 +5,7 @@ spring:
       charset: utf-8
 
 server:
-  port: 8090
+  port: 8095
 
 config:
   jwt:

@@ -11,8 +11,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,13 +52,6 @@ public class HospitalCarServiceImpl {
             setCreateDate(new Date(System.currentTimeMillis()));
         }};
         BeanUtils.copyProperties(form, car);
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = sdf.parse(form.getDate());
-            car.setDate(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         return mHospitalCarMapper.insert(car);
     }
 

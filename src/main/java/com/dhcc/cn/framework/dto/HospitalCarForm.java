@@ -1,8 +1,11 @@
 package com.dhcc.cn.framework.dto;
 
 
+import java.util.Date;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 
@@ -11,7 +14,8 @@ public class HospitalCarForm {
 
     private String user;
 
-    private String date;
+    @NotEmpty(message = "日期不能为空")
+    private Date date;
 
     /**
      * 本部派车
