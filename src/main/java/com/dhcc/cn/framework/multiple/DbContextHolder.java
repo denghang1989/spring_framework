@@ -8,9 +8,11 @@ import com.dhcc.cn.framework.enums.DBTypeEnum;
  */
 public class DbContextHolder {
 
-    private static final ThreadLocal contextHolder = new ThreadLocal<>();
+    private static final ThreadLocal<String> contextHolder = new ThreadLocal<>();
+
     /**
      * 设置数据源
+     *
      * @param dbTypeEnum
      */
     public static void setDbType(DBTypeEnum dbTypeEnum) {
@@ -19,10 +21,11 @@ public class DbContextHolder {
 
     /**
      * 取得当前数据源
+     *
      * @return
      */
     public static String getDbType() {
-        return (String) contextHolder.get();
+        return contextHolder.get();
     }
 
     /**

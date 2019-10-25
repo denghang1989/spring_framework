@@ -1,6 +1,6 @@
 package com.dhcc.cn.framework.dto;
 
-import com.dhcc.cn.framework.pojo.User;
+import com.dhcc.cn.framework.pojo.mysql.User;
 
 import lombok.Data;
 

@@ -1,5 +1,7 @@
 package com.dhcc.cn.framework.websocket;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -17,6 +19,8 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint(value = "/socketServer/{userid}")
 @Component
 public class SocketServer {
+
+    private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
 
     private Session session;
 
@@ -40,7 +44,7 @@ public class SocketServer {
                 System.out.println(entry.getKey() + "----" + entry.getValue());
             }
         }
-        System.out.println("id----->  " + id);
+        logger.info("id----->  " + id);
         sessionPool.put(userid, session);
         sessionIds.put(session.getId(), userid);
     }
@@ -52,7 +56,7 @@ public class SocketServer {
      */
     @OnMessage
     public void onMessage(String message) {
-        System.out.println("当前发送人sessionid为" + session.getId() + "发送内容为" + message);
+        logger.info("当前发送人sessionid为" + session.getId() + "发送内容为" + message);
     }
 
     /**
@@ -83,7 +87,6 @@ public class SocketServer {
      */
     public void sendMessage(String message, String userId) {
         Session s = sessionPool.get(userId);
-        //Session s = redisUtil.get(userId);
         if (s != null) {
             s.getAsyncRemote().sendText(message);
         }
