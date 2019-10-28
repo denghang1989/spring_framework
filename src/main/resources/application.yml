@@ -3,9 +3,13 @@ spring:
     encoding:
       force: true
       charset: utf-8
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+
 
 server:
-  port: 8889
+  port: 8089
 
 config:
   jwt:
