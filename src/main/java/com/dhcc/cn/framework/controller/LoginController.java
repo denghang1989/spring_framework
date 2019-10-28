@@ -19,19 +19,12 @@ import java.util.Optional;
 @ResponseResultBody
 public class LoginController {
 
-
     @Autowired
     UserServiceImpl mService;
 
     @PostMapping("/login")
     public Result<UserInfo> login(@Validated LoginForm loginForm) {
-        Result<UserInfo> result = null;
         Optional<UserInfo> optional = mService.getUser(loginForm.getName(),loginForm.getPsw());
-        if (optional.isPresent()) {
-            result = Result.success(optional.get());
-        } else {
-            result = Result.error(ResultStatus.LOGIN_ERROR);
-        }
-        return result;
+        return optional.map(userInfo -> Result.success(userInfo)).orElse(Result.error(ResultStatus.LOGIN_ERROR));
     }
 }
