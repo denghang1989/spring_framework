@@ -1,14 +1,16 @@
 package com.dhcc.cn.framework.dto;
 
-import com.dhcc.cn.framework.pojo.mysql.User;
-
 import lombok.Data;
 
 @Data
 public class UserInfo {
 
-    private User user;
-
+    private long   id;
+    private String userName;
+    private String email;
+    private String address;
+    private String loginName;
+    private String mobile;
     private String token;
 
 }
