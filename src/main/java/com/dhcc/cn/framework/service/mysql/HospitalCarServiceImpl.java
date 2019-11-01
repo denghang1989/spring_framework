@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dhcc.cn.framework.annotation.DataChanged;
 import com.dhcc.cn.framework.dto.HospitalCarForm;
 import com.dhcc.cn.framework.dto.emergency.HospitalCarData;
+import com.dhcc.cn.framework.enums.TopicEmum;
 import com.dhcc.cn.framework.mapper.HospitalCarMapper;
 import com.dhcc.cn.framework.pojo.mysql.HospitalCar;
 import com.github.abel533.echarts.Option;
@@ -48,8 +49,8 @@ public class HospitalCarServiceImpl {
      * @param form
      * @return
      */
-    @DataChanged
-    public int save(HospitalCarForm form) {
+    @DataChanged(topic = "HospitalCar", value = TopicEmum.INSERT)
+    public int insert(HospitalCarForm form) {
         HospitalCar car = new HospitalCar() {{
             setCreateDate(new Date(System.currentTimeMillis()));
         }};
@@ -83,5 +84,12 @@ public class HospitalCarServiceImpl {
     public Option getWeekHospitalCar(String date) {
         Option option = new Option();
         return option;
+    }
+
+    public int update(HospitalCarForm form) {
+        HospitalCar car = new HospitalCar();
+        BeanUtils.copyProperties(form, car);
+        int result = mHospitalCarMapper.updateById(car);
+        return result;
     }
 }

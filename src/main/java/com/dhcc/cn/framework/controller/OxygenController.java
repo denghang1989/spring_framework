@@ -41,6 +41,11 @@ public class OxygenController {
         return mOxygenService.insert(form);
     }
 
+    @PostMapping("/update")
+    public int update(@Validated OxygenForm form){
+        return mOxygenService.update(form);
+    }
+
     @GetMapping("/all")
     public List<OxygenData> getAllByDate(Date start, Date end) {
         return mOxygenService.getAll(start, end);

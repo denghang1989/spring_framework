@@ -35,8 +35,13 @@ public class HospitalCarController {
     }
 
     @PostMapping("/save")
-    public int save(@Validated HospitalCarForm form) {
-        return mHCService.save(form);
+    public int insert(@Validated HospitalCarForm form) {
+        return mHCService.insert(form);
+    }
+
+    @PostMapping("/update")
+    public int update(@Validated HospitalCarForm form) {
+        return mHCService.update(form);
     }
 
     @GetMapping("/all")

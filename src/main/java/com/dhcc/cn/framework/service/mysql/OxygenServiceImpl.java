@@ -57,4 +57,11 @@ public class OxygenServiceImpl {
         }).collect(Collectors.toList());
         return oxygenDataList;
     }
+
+    public int update(OxygenForm form) {
+        Oxygen oxygen = new Oxygen();
+        BeanUtils.copyProperties(form, oxygen);
+        int result = mOxygenMapper.updateById(oxygen);
+        return result;
+    }
 }

@@ -10,6 +10,7 @@ import lombok.Data;
 
 @Data
 public class OxygenForm {
+    private long id;
 
     private String user;
 
