@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * 高压氧科
  */
 @Service
-public class OxygenServiceImpl  {
+public class OxygenServiceImpl {
 
     @Autowired
     OxygenMapper mOxygenMapper;
@@ -29,26 +29,26 @@ public class OxygenServiceImpl  {
      * @return
      * @desc 高压氧科
      */
-    public OxygenData getOxygenData(String date) {
+    public OxygenData getOxygenData(Date date) {
         OxygenData oxygenData = new OxygenData();
         QueryWrapper<Oxygen> wrapper = new QueryWrapper<>();
-        wrapper.eq("date",date);
+        wrapper.eq("date", date);
         Oxygen oxygen = mOxygenMapper.selectOne(wrapper);
-        BeanUtils.copyProperties(oxygen,oxygenData);
+        BeanUtils.copyProperties(oxygen, oxygenData);
         return oxygenData;
     }
 
-    public int save(OxygenForm form){
+    public int insert(OxygenForm form) {
         Oxygen oxygen = new Oxygen(){{
-            setDate(new Date());
+            setCreateDate(new Date());
         }};
-        BeanUtils.copyProperties(form,oxygen);
+        BeanUtils.copyProperties(form, oxygen);
         return mOxygenMapper.insert(oxygen);
     }
 
-    public List<OxygenData> getAll(String start, String end) {
+    public List<OxygenData> getAll(Date start, Date end) {
         QueryWrapper<Oxygen> wrapper = new QueryWrapper<>();
-        wrapper.between("date",start,end);
+        wrapper.between("date", start, end);
         List<Oxygen> oxygens = mOxygenMapper.selectList(wrapper);
         List<OxygenData> oxygenDataList = oxygens.stream().map(oxygen -> {
             OxygenData oxygenData = new OxygenData();

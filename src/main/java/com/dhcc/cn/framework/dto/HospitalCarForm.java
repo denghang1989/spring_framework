@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 
@@ -14,7 +13,6 @@ public class HospitalCarForm {
 
     private String user;
 
-    @NotEmpty(message = "日期不能为空")
     private Date date;
 
     /**

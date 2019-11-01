@@ -1,6 +1,7 @@
 package com.dhcc.cn.framework.service.mysql;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.dhcc.cn.framework.annotation.DataChanged;
 import com.dhcc.cn.framework.dto.HospitalCarForm;
 import com.dhcc.cn.framework.dto.emergency.HospitalCarData;
 import com.dhcc.cn.framework.mapper.HospitalCarMapper;
@@ -31,7 +32,7 @@ public class HospitalCarServiceImpl {
      * @return
      * @desc 24小时院前出车人次
      */
-    public HospitalCarData getHospitalCar(String date) {
+    public HospitalCarData getHospitalCar(Date date) {
         HospitalCarData hospitalCarData = null;
         QueryWrapper<HospitalCar> wrapper = new QueryWrapper<>();
         wrapper.eq("date", date);
@@ -47,6 +48,7 @@ public class HospitalCarServiceImpl {
      * @param form
      * @return
      */
+    @DataChanged
     public int save(HospitalCarForm form) {
         HospitalCar car = new HospitalCar() {{
             setCreateDate(new Date(System.currentTimeMillis()));
@@ -61,7 +63,7 @@ public class HospitalCarServiceImpl {
      * @return
      * @desc 获取一段时间的数据
      */
-    public List<HospitalCarData> getAll(String startDate, String endDate) {
+    public List<HospitalCarData> getAll(Date startDate, Date endDate) {
         QueryWrapper<HospitalCar> wrapper = new QueryWrapper<>();
         wrapper.between("date", startDate, endDate);
         List<HospitalCar> hospitalCars = mHospitalCarMapper.selectList(wrapper);

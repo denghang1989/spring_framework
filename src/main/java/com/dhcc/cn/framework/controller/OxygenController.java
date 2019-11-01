@@ -5,13 +5,17 @@ import com.dhcc.cn.framework.dto.OxygenForm;
 import com.dhcc.cn.framework.dto.emergency.OxygenData;
 import com.dhcc.cn.framework.service.mysql.OxygenServiceImpl;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 
@@ -27,19 +31,19 @@ public class OxygenController {
     @Autowired
     OxygenServiceImpl mOxygenService;
 
-    @GetMapping("/date")
-    public OxygenData getOxygenData(String date){
+    @GetMapping("/{date}")
+    public OxygenData getOxygenData(@PathVariable Date date) {
         return mOxygenService.getOxygenData(date);
     }
 
     @PostMapping("/save")
-    public int save(@Validated OxygenForm form){
-        return mOxygenService.save(form);
+    public int insert(@Validated OxygenForm form) {
+        return mOxygenService.insert(form);
     }
 
     @GetMapping("/all")
-    public List<OxygenData> getAllByDate(String start,String end){
-        return mOxygenService.getAll(start,end);
+    public List<OxygenData> getAllByDate(Date start, Date end) {
+        return mOxygenService.getAll(start, end);
     }
 
 }
