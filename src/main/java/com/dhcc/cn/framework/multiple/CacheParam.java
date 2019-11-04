@@ -1,11 +1,11 @@
-package com.dhcc.cn.framework.config;
+package com.dhcc.cn.framework.multiple;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "config.mysql")
-public class DruidParam {
+@ConfigurationProperties(prefix = "config.cache")
+public class CacheParam {
     private String url;
     private String username;
     private String password;

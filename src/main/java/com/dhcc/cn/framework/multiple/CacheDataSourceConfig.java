@@ -1,4 +1,4 @@
-package com.dhcc.cn.framework.config;
+package com.dhcc.cn.framework.multiple;
 
 import com.intersys.jdbc.CacheDataSource;
 
@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 @Component
-public class CacheConfig {
+public class CacheDataSourceConfig {
 
     @Resource
     private CacheParam mCacheParam ;

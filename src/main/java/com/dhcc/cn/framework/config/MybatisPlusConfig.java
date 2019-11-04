@@ -2,6 +2,8 @@ package com.dhcc.cn.framework.config;
 
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.dhcc.cn.framework.enums.DBTypeEnum;
+import com.dhcc.cn.framework.multiple.CacheDataSourceConfig;
+import com.dhcc.cn.framework.multiple.DruidDataSourceConfig;
 import com.dhcc.cn.framework.multiple.DynamicDataSource;
 
 
@@ -25,10 +27,10 @@ import javax.sql.DataSource;
 public class MybatisPlusConfig {
 
     @Autowired
-    CacheConfig mCacheConfig;
+    CacheDataSourceConfig mCacheConfig;
 
     @Autowired
-    DruidConfig mDruidConfig;
+    DruidDataSourceConfig mDruidConfig;
 
     //定义mysql
     @Bean(name = "mysql")
