@@ -10,13 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 全局handler前日期统一处理
- * @author zhanghang
- * @date 2018/1/11
- */
 @Component
-public class DateConverterConfig implements Converter<String, Date> {
+public class String2DateConverterConfig implements Converter<String, Date> {
 
     private static final List<String> formarts = new ArrayList<>(4);
     static{

@@ -31,8 +31,8 @@ public class OxygenController {
     @Autowired
     OxygenServiceImpl mOxygenService;
 
-    @GetMapping("/{date}")
-    public OxygenData getOxygenData(@PathVariable Date date) {
+    @GetMapping("/date")
+    public OxygenData getOxygenData(Date date) {
         return mOxygenService.getOxygenData(date);
     }
 

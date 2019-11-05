@@ -6,6 +6,9 @@ spring:
   thymeleaf:
     encoding: UTF-8
     cache: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 
 server:

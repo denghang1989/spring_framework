@@ -29,8 +29,8 @@ public class HospitalCarController {
     @Autowired
     HospitalCarServiceImpl mHCService;
 
-    @GetMapping("/{date}")
-    public HospitalCarData getHospitalCar(@PathVariable Date date) {
+    @GetMapping("/date")
+    public HospitalCarData getHospitalCar(Date date) {
         return mHCService.getHospitalCar(date);
     }
 
