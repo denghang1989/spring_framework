@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.cn.framework.mapper.EposideDiagnos">
+
+    <resultMap id="Diagnos" type="com.dhcc.cn.framework.pojo.cache.Diagnos">
+    </resultMap>
+
+    <sql id="columns">
+
+    </sql>
+
+    <select id="getDiagnosByEposideId" parameterType="string" resultType="collection" resultMap="Diagnos">
+        select <include refid="columns"/> from SQLUser.MR_Diagnos left join SQLUser.MR_Adm
+    </select>
+    
+</mapper>

@@ -16,7 +16,7 @@ import java.util.Optional;
 import javax.annotation.Resource;
 
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> {
+public class UserServiceImpl {
     @Resource
     private JwtConfig jwtConfig;
 

@@ -8,6 +8,8 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Order(value = -100)
-@Slf4j
 @Aspect
 public class DataSourceSwitchAspect {
+
+    private static final Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 
     @Pointcut("execution(* com.dhcc.cn.framework.service.mysql..*.*(..))")
     private void mysqlAspect() {
@@ -28,8 +31,9 @@ public class DataSourceSwitchAspect {
     private void cacheAspect() {
     }
 
-    @Before( "mysqlAspect()" )
+    @Before("mysqlAspect()")
     public void mysql(JoinPoint joinPoint) {
+        logger.info("mysql");
         DbContextHolder.setDbType(DBTypeEnum.MYSQL);
     }
 
@@ -37,12 +41,14 @@ public class DataSourceSwitchAspect {
      * 清除数据源上下文
      */
     @After("mysqlAspect()")
-    public void mysqlAfter(){
+    public void mysqlAfter() {
+        logger.info("mysql");
         DbContextHolder.clearDbType();
     }
 
     @Before("cacheAspect()")
     public void cache(JoinPoint joinPoint) {
+        logger.info("CACHE");
         DbContextHolder.setDbType(DBTypeEnum.CACHE);
     }
 
@@ -50,7 +56,8 @@ public class DataSourceSwitchAspect {
      * 清除数据源上下文
      */
     @After("cacheAspect()")
-    public void cacheAfter(){
+    public void cacheAfter() {
+        logger.info("CACHE");
         DbContextHolder.clearDbType();
     }
 }

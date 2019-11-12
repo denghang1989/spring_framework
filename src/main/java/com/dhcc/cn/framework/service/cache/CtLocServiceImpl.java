@@ -1,6 +1,5 @@
 package com.dhcc.cn.framework.service.cache;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dhcc.cn.framework.mapper.CtLocMapper;
 import com.dhcc.cn.framework.pojo.cache.CtLoc;
 
@@ -10,7 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CtLocServiceImpl extends ServiceImpl<CtLocMapper, CtLoc> {
+
+public class CtLocServiceImpl {
 
     @Autowired
     CtLocMapper mCtLocMapper;
