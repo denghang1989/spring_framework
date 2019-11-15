@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 
 @Controller
 @RequestMapping("/MedicalRescue")
@@ -30,7 +32,7 @@ public class MedicalRescueController {
     @PostMapping("/save")
     @ResponseResultBody
     @ResponseBody
-    public int insert(MedicalRescueForm form){
+    public Long insert(MedicalRescueForm form){
         return mService.insert(form);
     }
 
@@ -46,5 +48,12 @@ public class MedicalRescueController {
     @ResponseBody
     public List<MedicalRescueForm> getMedicalRescueByDate(Date date){
         return mService.selectByDate(date);
+    }
+
+    @GetMapping("/dateList")
+    @ResponseResultBody
+    @ResponseBody
+    public List<MedicalRescueForm> getMedicalRescueListByDates(Date startDate, Date endDate){
+        return mService.getMedicalRescueListByDates(startDate,endDate);
     }
 }

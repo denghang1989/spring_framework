@@ -4,7 +4,6 @@ import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
 
-import javax.annotation.RegEx;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 

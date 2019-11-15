@@ -13,17 +13,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class MedicalRescueService {
 
     @Autowired
     MedicalRescueMapper mMapper;
 
-    public int insert(MedicalRescueForm medicalRescueForm){
+    public Long insert(MedicalRescueForm medicalRescueForm){
         MedicalRescue medicalRescue = new MedicalRescue();
         medicalRescue.setCreateDatetime(new Date());
         BeanUtils.copyProperties(medicalRescueForm,medicalRescue);
-        return mMapper.insert(medicalRescue);
+        int insert = mMapper.insert(medicalRescue);
+        return medicalRescue.getId();
     }
 
     public MedicalRescueForm selectById(int id){
@@ -36,12 +40,23 @@ public class MedicalRescueService {
     public List<MedicalRescueForm> selectByDate(Date date){
         QueryWrapper<MedicalRescue> medicalRescueQueryWrapper = new QueryWrapper<>();
         medicalRescueQueryWrapper.lambda().eq(MedicalRescue::getCreateDatetime,date);
+        List<MedicalRescueForm> list = getMedicalRescueList(medicalRescueQueryWrapper);
+        return list;
+    }
+
+    public List<MedicalRescueForm> getMedicalRescueListByDates(Date startDate, Date endDate) {
+        QueryWrapper<MedicalRescue> medicalRescueQueryWrapper = new QueryWrapper<>();
+        medicalRescueQueryWrapper.lambda().ge(MedicalRescue::getCreateDatetime,startDate).le(MedicalRescue::getCreateDatetime,endDate);
+        List<MedicalRescueForm> list = getMedicalRescueList(medicalRescueQueryWrapper);
+        return list;
+    }
+
+    private List<MedicalRescueForm> getMedicalRescueList(QueryWrapper<MedicalRescue> medicalRescueQueryWrapper) {
         List<MedicalRescue> medicalRescues = mMapper.selectList(medicalRescueQueryWrapper);
-        List<MedicalRescueForm> list = medicalRescues.stream().map(medicalRescue -> {
+        return medicalRescues.stream().map(medicalRescue -> {
             MedicalRescueForm form = new MedicalRescueForm();
             BeanUtils.copyProperties(medicalRescue, form);
             return form;
         }).collect(Collectors.toList());
-        return list;
     }
 }
