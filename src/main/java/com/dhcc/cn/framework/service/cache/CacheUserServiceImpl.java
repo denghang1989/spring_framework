@@ -19,19 +19,19 @@ public class CacheUserServiceImpl {
 
     public CacheUser getCacheUserById(String id){
         QueryWrapper<CacheUser> wrapper = new QueryWrapper<>();
-        wrapper.lambda().select(CacheUser::getCode,CacheUser::getName,CacheUser::getId).eq(CacheUser::getId,id);
+        wrapper.lambda().select(CacheUser.class,tableFieldInfo -> true).eq(CacheUser::getId,id);
         return mMapper.selectOne(wrapper);
     }
 
     public List<CacheUser> getCacheUserByName(String name){
         QueryWrapper<CacheUser> wrapper = new QueryWrapper<>();
-        wrapper.lambda().select(CacheUser::getCode,CacheUser::getName,CacheUser::getId).like(CacheUser::getName,name);
+        wrapper.lambda().select(CacheUser.class,tableFieldInfo -> true).like(CacheUser::getName,name);
         return mMapper.selectList(wrapper);
     }
 
     public List<CacheUser> getCacheUserByCode(String code){
         QueryWrapper<CacheUser> wrapper = new QueryWrapper<>();
-        wrapper.lambda().select(CacheUser::getCode,CacheUser::getName,CacheUser::getId).eq(CacheUser::getCode,code);
+        wrapper.lambda().select(CacheUser.class,tableFieldInfo -> true).eq(CacheUser::getCode,code);
         return mMapper.selectList(wrapper);
     }
 
