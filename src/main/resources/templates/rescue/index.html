@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>宝安区突发事件医疗救援信息报告表</title>
+   <!-- <link rel="stylesheet" type="text/css" th:href="@{/whiteboards/css/font-awesome.min.css}"/>-->
+    <script th:src="@{/easyui/jquery.min.js}" type="text/javascript" charset="utf-8"></script>              <!-- jquery核心库 -->
+    <script th:src="@{/easyui/jquery.easyui.min.js}" type="text/javascript" charset="utf-8"></script>       <!-- easyui核心库 -->
+    <link th:href="@{/easyui/themes/default/easyui.css}" rel="stylesheet" type="text/css"/>                 <!-- easyui核心UI文件 css -->
+    <link th:href="@{/easyui/themes/icon.css}" rel="stylesheet" type="text/css"/>                           <!-- easyui图标 -->
+    <script th:src="@{/easyui/locale/easyui-lang-zh_CN.js}" type="text/javascript" charset="utf-8"></script>
+
+
+    <style>
+
+        body{
+            width: 75%;
+            min-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        form > div{
+            margin-left: 50px;
+            margin-top: 10px;
+        }
+
+        .textbox-label{
+            font-size: 16px;
+        }
+
+        .textbox .textbox-text{
+            font-size: 16px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div style="font-size: 28px;text-align: center">宝安区突发事件医疗救援信息报告表</div>
+    <div style="margin: 80px"></div>
+    <form id="rescue" method="post">
+        <div>
+            <label class="textbox-label" for="organization" style="text-align: left;width: 100px;">报告单位：</label>
+            <input class="easyui-textbox" name="organization" id="organization" style="width:300px" th:value="${rescue.organization}" data-options="required:true" />
+            <label class="textbox-label" for="reportDatetime" style="text-align: left;width: 100px;margin-left: 50px;">报告时间：</label>
+            <input class="easyui-datetimebox" name="reportDatetime" id="reportDatetime" style="width:200px" th:value="${rescue.reportDatetime}" data-options="required:true"/>
+        </div>
+
+        <div>
+            <label class="textbox-label" for="reporter" style="text-align: left;width: 100px;">报告人：</label>
+            <input class="easyui-textbox" name="reporter" id="reporter" style="width:180px" th:value="${rescue.reporter}" data-options="required:true" />
+            <label class="textbox-label" for="phone" style="text-align: left;width: 70px;margin-left: 50px;">手机：</label>
+            <input class="easyui-textbox" name="phone" id="phone" style="width:150px" th:value="${rescue.phone}" />
+            <label class="textbox-label" for="approver" style="text-align: left;width: 120px;margin-left: 50px;">审核院领导：</label>
+            <input class="easyui-textbox" name="approver" id="approver" style="width:150px" th:value="${rescue.approver}" />
+        </div>
+
+        <div>
+            <div class="easyui-panel" style="padding: 10px;">
+                <div id="event">
+                    <label class="textbox-label" style="text-align: left;width: 400px;font-size: 28px">突 发 公 共 事 件 信 息</label>
+                    <div style="margin-top: 10px;margin-left: 80px;">
+                        <label class="textbox-label" for="eventType" style="text-align: left;width: 100px;">事件类型：</label>
+                        <input class="easyui-textbox" name="eventType" id="eventType" style="width:200px" />
+
+                        <label class="textbox-label" for="eventLevel" style="text-align: left;width: 100px;margin-left: 50px;">事件分级：</label>
+                        <select class="easyui-combobox" name="eventLevel" id="eventLevel" style="width:100px" th:sel="${rescue.eventLevel}" >
+                            <option value="0"></option>
+                            <option value="1">Ⅰ级</option>
+                            <option value="2">Ⅱ级</option>
+                            <option value="3">Ⅲ级</option>
+                            <option value="4">Ⅳ级</option>
+                        </select>
+                        <label class="textbox-label"  style="text-align: left;width: 80px;">级</label>
+                    </div>
+
+                    <div style="margin-top: 10px;margin-left: 80px;">
+                        <label class="textbox-label" for="occurrenceDatetime" style="text-align: left;width: 100px;">发生时间：</label>
+                        <input class="easyui-datetimebox" name="occurrenceDatetime" id="occurrenceDatetime" style="width:200px" th:value="${rescue.occurrenceDatetime}" data-options="required:true" />
+                        <label class="textbox-label" for="occurrenceAddress" style="text-align: left;width: 100px;margin-left: 50px;">发生地点：</label>
+                        <input class="easyui-textbox" name="occurrenceAddress" id="occurrenceAddress" style="width:250px" th:value="${rescue.occurrenceAddress}" />
+                        <label class="textbox-label" for="paadmDatetime" style="text-align: left;width: 100px;margin-left: 50px;">入院时间：</label>
+                        <input class="easyui-datetimebox" name="paadmDatetime" id="paadmDatetime" style="width:200px" th:value="${rescue.paadmDatetime}" data-options="required:true" />
+                    </div>
+
+                    <div style="margin-top: 10px;margin-left: 80px;">
+                        <label class="textbox-label" for="eventDesc" style="text-align: left;width: 120px;">事件简要经过： </label>
+                        <input class="easyui-textbox" name="eventDesc" id="eventDesc" style="width:50%;height: 120px;" data-options="multiline:true" th:value="${rescue.eventDesc}" />
+                    </div>
+
+                    <div style="margin-top: 10px;margin-left: 80px;">
+                        <label class="textbox-label" style="text-align: left;width: 350px;">患者（伤员）病情概况（详细病情请填附表）： </label>
+
+                        <label class="textbox-label" for="totalNumber" style="text-align: left;width: 60px;">总数： </label>
+                        <input class="easyui-textbox" name="totalNumber" id="totalNumber" style="width:50px;" th:value="${rescue.totalNumber}" />
+                        <label class="textbox-label"  style="text-align: left;width: 40px;">人；</label>
+
+                        <input class="easyui-textbox" name="mildNumber" id="mildNumber" style="width:50px;" th:value="${rescue.mildNumber}" />
+                        <label class="textbox-label"  style="text-align: left;width: 60px;">人轻，</label>
+
+                        <input class="easyui-textbox" name="severeNumber" id="severeNumber" style="width:50px;" th:value="${rescue.severeNumber}" />
+                        <label class="textbox-label"  style="text-align: left;width: 60px;">人重,</label>
+
+                        <input class="easyui-textbox" name="critically_Number" id="critically_Number" style="width:50px;" th:value="${rescue.critically_Number}" />
+                        <label class="textbox-label"  style="text-align: left;width: 80px;">人危重，</label>
+
+                        <input class="easyui-textbox" name="deathNumber" id="deathNumber" style="width:50px;" th:value="${rescue.deathNumber}" />
+                        <label class="textbox-label"  style="text-align: left;width: 120px;">人院前死亡。</label>
+
+                    </div>
+
+                    <div style="margin-top: 10px;margin-left: 80px;">
+
+                        <label class="textbox-label" for="eventTrend" style="text-align: left;width: 300px;">突发事件发展趋势（是否继续扩大）： </label>
+                        <input class="easyui-textbox" name="eventTrend" id="eventTrend" style="width:40%;height: 90px;" data-options="multiline:true" th:value="${rescue.eventTrend}" />
+
+                    </div>
+                </div>
+
+                <div id="inway">
+                    <label class="textbox-label" style="text-align: left;width: 400px;font-size: 28px">入院方式</label>
+                    <div style="margin-top: 10px;margin-left: 80px;">
+                        <label class="textbox-label" for="ambulanceNumber" style="text-align: left;width: 120px;">监护型救护车</label>
+                        <input class="easyui-textbox" name="ambulanceNumber" id="ambulanceNumber" style="width:50px" th:value="${rescue.ambulanceNumber}" />
+                        <label class="textbox-label" style="text-align: left;width: 50px;">台；</label>
+
+                        <label class="textbox-label" for="doctorNumber" style="text-align: left;width: 50px;">医生</label>
+                        <input class="easyui-textbox" name="doctorNumber" id="doctorNumber" style="width:50px" th:value="${rescue.doctorNumber}" />
+                        <label class="textbox-label" style="text-align: left;width: 50px;">人、</label>
+
+                        <label class="textbox-label" for="nurserNumber" style="text-align: left;width: 50px;">护士</label>
+                        <input class="easyui-textbox" name="nurserNumber" id="nurserNumber" style="width:50px;" th:value="${rescue.nurserNumber}" />
+                        <label class="textbox-label"  style="text-align: left;width: 50px;">人、</label>
+
+                        <label class="textbox-label" for="driverNumber" style="text-align: left;width: 50px;">司机</label>
+                        <input class="easyui-textbox" name="driverNumber" id="driverNumber" style="width:50px;" th:value="${rescue.driverNumber}" />
+                        <label class="textbox-label"  style="text-align: left;width: 50px;">人</label>
+                    </div>
+
+                    <div style="margin-top: 10px;margin-left: 80px;">
+
+                        <label class="textbox-label" for="otherWays" style="text-align: left;width: 120px;">其他入院方式  </label>
+                        <input class="easyui-textbox" name="otherWays" id="otherWays" style="width:30%;height: 80px;" data-options="multiline:true" th:value="${rescue.otherWays}" />
+
+                    </div>
+
+                </div>
+
+                <div id="resource" style="margin-top: 10px;">
+                    <label class="textbox-label" style="text-align: left;width: 400px;font-size: 28px">需增援资源情况</label>
+                    <div style="margin-top: 10px;margin-left: 80px;">
+                        <label class="textbox-label" for="consultation" style="text-align: left;width: 150px;">是否需增援/会诊</label>
+                        <input class="easyui-textbox" name="consultation" id="consultation" style="width:60px" th:value="${rescue.consultation}" />
+
+                        <label class="textbox-label" for="additionalResources" style="text-align: left;width: 150px;margin-left: 30px;">请求增援的资源：</label>
+                        <input class="easyui-textbox" name="additionalResources" id="additionalResources" style="width:30%;height: 80px;" data-options="multiline:true" th:value="${rescue.additionalResources}" />
+
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-save'" style="margin-left:120px;width:120px;height: 40px;font-size: 20px;">保存提交</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" data-options="iconCls:'icon-redo'" style="margin-left:10px;width:120px;height: 40px;font-size: 20px;">清屏</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input class="easyui-textbox" name="createUser" id="createUser"  th:value="${userId}" />
+
+    </form>
+<script th:inline="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+
+        var level=$("#eventLevel").attr("sel");
+        $("#eventLevel").combobox("select",level);
+
+        $("#createUser").next().hide();
+
+    });
+
+    function submitForm(){
+        $('#rescue').form('submit',{
+            url:"/MedicalRescue/save",
+            success:function(data){
+                var data = eval('(' + data + ')');
+                if(data.code==0){
+                    $.messager.show({
+                        title:'提示',
+                        msg:'保存成功。',
+                        timeout:2000,
+                        showType:'null',
+                        style:{
+
+                        }
+                    });
+                }else{
+                    $.messager.show({
+                        title:'提示',
+                        msg:data.msg,
+                        timeout:2000,
+                        showType:'null',
+                        style:{
+
+                        }
+                    });
+                }
+            }
+        });
+    }
+    function clearForm(){
+        $('#rescue').form('clear');
+    }
+
+</script>
+</body>
+
+</html>

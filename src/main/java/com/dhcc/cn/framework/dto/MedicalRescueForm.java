@@ -70,13 +70,13 @@ public class MedicalRescueForm {
 
     private String otherWays;
 
-    private long consultation;
+    private String consultation;
 
     private long reinforce;
 
     private String additionalResources;
 
-    private Date createDatetime;
+    //private Date createDatetime;
 
     private long createUser;
 }

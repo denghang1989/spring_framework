@@ -4,8 +4,10 @@ import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.MedicalRescueForm;
 import com.dhcc.cn.framework.service.mysql.MedicalRescueService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +26,19 @@ public class MedicalRescueController {
     @Autowired
     MedicalRescueService mService;
 
-    @GetMapping("/index")
-    public String medicalRescue(String paadmNo,String userId){
-        return "medicalRescue";
+    @GetMapping("/rescue/index")
+    public String medicalRescue(String userId,String rescueId, Model model){
+
+        MedicalRescueForm rescueForm;
+        if(StringUtils.isEmpty(rescueId)){
+            rescueForm=new MedicalRescueForm();
+        }else{
+            rescueForm=getMedicalRescueById(Integer.valueOf(rescueId));
+        }
+        model.addAttribute("userId",userId);
+        model.addAttribute("rescue",rescueForm);
+
+        return "rescue/index";
     }
 
     @PostMapping("/save")
