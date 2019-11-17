@@ -2,8 +2,12 @@ package com.dhcc.cn.framework.controller;
 
 import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.MedicalRescueDetailForm;
+import com.dhcc.cn.framework.dto.result.Result;
+import com.dhcc.cn.framework.dto.result.ResultStatus;
+import com.dhcc.cn.framework.pojo.mysql.MedicalRescueDetail;
 import com.dhcc.cn.framework.service.mysql.MedicalRescueDetailServiceImpl;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,13 +60,27 @@ public class MedicalRescueDetailController {
     @GetMapping("/get/{id}")
     @ResponseResultBody
     @ResponseBody
-    public MedicalRescueDetailForm queryById(@PathVariable("id") String id){
+    public MedicalRescueDetailForm queryById(@PathVariable("id") Long id){
         return mService.getMedicalRescueDetailId(id);
     }
 
     @GetMapping("/get/mainId/{mainId}")
+    @ResponseResultBody
+    @ResponseBody
     public List<MedicalRescueDetailForm> queryByMainId(@PathVariable("mainId") String mainId){
         return mService.getAllByMainId(mainId);
+    }
+
+    @GetMapping("/get/paadmId/{paadmId}")
+    @ResponseResultBody
+    @ResponseBody
+    public Result<MedicalRescueDetailForm> queryByPaadmId(@PathVariable("paadmId") String paadmId){
+        Optional<MedicalRescueDetail> optional = mService.getMedicalRescueDetailByEposideId(paadmId);
+        return optional.map(medicalRescueDetail -> {
+            MedicalRescueDetailForm form = new MedicalRescueDetailForm();
+            BeanUtils.copyProperties(medicalRescueDetail, form);
+            return Result.success(form);
+        }).orElse(Result.error(ResultStatus.DATA_ERROR));
     }
 
 }
