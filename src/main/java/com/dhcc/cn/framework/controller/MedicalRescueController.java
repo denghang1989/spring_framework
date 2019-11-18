@@ -2,7 +2,7 @@ package com.dhcc.cn.framework.controller;
 
 import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.MedicalRescueForm;
-import com.dhcc.cn.framework.service.mysql.MedicalRescueService;
+import com.dhcc.cn.framework.service.mysql.MedicalRescueServiceImpl;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 
 @Controller
 @RequestMapping("/MedicalRescue")
 public class MedicalRescueController {
 
     @Autowired
-    MedicalRescueService mService;
+    MedicalRescueServiceImpl mService;
 
     @GetMapping("/rescue/index")
     public String medicalRescue(String userId,String rescueId, Model model){

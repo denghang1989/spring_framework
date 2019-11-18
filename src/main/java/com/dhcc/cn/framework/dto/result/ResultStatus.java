@@ -10,6 +10,7 @@ import lombok.ToString;
 public enum ResultStatus {
     SUCCESS(HttpStatus.OK, 0, "成功"),
     LOGIN_ERROR(HttpStatus.OK,-1,"登入失败，用户名或者密码错误"),
+    DATA_ERROR(HttpStatus.OK,-2,"数据不存在"),
     BAD_REQUEST(HttpStatus.BAD_REQUEST, 400, "参数异常"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, 500, "服务器异常");
 
