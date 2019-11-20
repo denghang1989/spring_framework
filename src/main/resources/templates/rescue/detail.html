@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>宝安区突发事件伤病员院内救治情况</title>
+    <script th:src="@{/easyui/jquery.min.js}" type="text/javascript" charset="utf-8"></script>              <!-- jquery核心库 -->
+    <script th:src="@{/easyui/jquery.easyui.min.js}" type="text/javascript" charset="utf-8"></script>       <!-- easyui核心库 -->
+    <link th:href="@{/easyui/themes/default/easyui.css}" rel="stylesheet" type="text/css"/>                 <!-- easyui核心UI文件 css -->
+    <link th:href="@{/easyui/themes/icon.css}" rel="stylesheet" type="text/css"/>                           <!-- easyui图标 -->
+    <script th:src="@{/easyui/locale/easyui-lang-zh_CN.js}" type="text/javascript" charset="utf-8"></script>
+
+    <style>
+
+        form > div{
+            margin-left: 50px;
+            margin-top: 10px;
+        }
+
+        .textbox-label{
+            font-size: 16px;
+        }
+
+        .textbox .textbox-text{
+            font-size: 16px;
+        }
+
+        form.
+
+    </style>
+
+</head>
+<body>
+
+    <form id="detail" method="post">
+        <div>
+            <label class="textbox-label" for="patName" style="text-align: left;width: 60px;">姓名：</label>
+            <input class="easyui-textbox" name="patName" id="patName" style="width:100px" th:value="${detail.patName}" data-options="required:true" />
+
+            <label class="textbox-label" for="patSex" style="text-align: left;width: 60px;">性别：</label>
+            <select class="easyui-combobox" name="patSex" id="patSex" style="width:80px" th:sel="${detail.patSex}" >
+                <option value=""></option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+                <option value="不详">不详</option>
+            </select>
+
+            <label class="textbox-label" for="patAge" style="text-align: left;width: 60px;">年龄：</label>
+            <input class="easyui-textbox" name="patAge" id="patAge" style="width:60px" th:value="${detail.patAge}" />
+
+            <label class="textbox-label" for="patNation" style="text-align: left;width: 60px;">民族：</label>
+            <input class="easyui-textbox" name="patNation" id="patNation" style="width:60px" th:value="${detail.patNation}" />
+
+            <label class="textbox-label" for="patOccupation" style="text-align: left;width: 60px;">职业：</label>
+            <input class="easyui-textbox" name="patOccupation" id="patOccupation" style="width:80px" th:value="${detail.patOccupation   }" />
+
+        </div>
+
+        <div>
+            <label class="textbox-label" for="patDiag" style="text-align: left;width: 90px;">初步诊断：</label>
+            <input class="easyui-textbox" name="patDiag" id="patDiag" style="width:190px" th:value="${detail.patDiag}" />
+
+            <label class="textbox-label" for="patAdmloc" style="text-align: left;width: 90px;">收治科室：</label>
+            <input class="easyui-textbox" name="patAdmloc" id="patAdmloc" style="width:120px" th:value="${detail.patAdmloc}" />
+
+            <label class="textbox-label" for="patLevel" style="text-align: left;width: 90px;">病情分级：</label>
+            <select class="easyui-combobox" name="patLevel" id="patLevel" style="width:90px" th:sel="${detail.patLevel}" >
+                <option value=""></option>
+                <option value="危重">危重</option>
+                <option value="重">重</option>
+                <option value="轻">轻</option>
+            </select>
+
+            <label class="textbox-label" for="patReturn" style="text-align: left;width: 90px;">转归情况：</label>
+            <select class="easyui-combobox" name="patReturn" id="patReturn" style="width:90px" th:sel="${detail.patReturn}" >
+                <option value=""></option>
+                <option value="平稳">平稳</option>
+                <option value="不平稳">不平稳</option>
+            </select>
+
+        </div>
+
+        <div>
+            <label class="textbox-label" for="patConsult" style="text-align: left;width: 90px;">会诊专家：</label>
+            <input class="easyui-textbox" name="patConsult" id="patConsult" style="width:300px" th:value="${detail.patConsult}" />
+        </div>
+
+        <div>
+            <label class="textbox-label" for="patTrans" style="text-align: left;width: 150px;">拟转医院及科室：</label>
+            <input class="easyui-textbox" name="patTrans" id="patTrans" style="width:300px" th:value="${detail.patTrans}" />
+        </div>
+
+        <div>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-save'" style="float: right;margin-right:100px;width:120px;height: 40px;font-size: 20px;">保存提交</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" data-options="iconCls:'icon-redo'" style="float: right;margin-right:20px;width:90px;height: 40px;font-size: 20px;">清屏</a>
+        </div>
+
+        <input class="easyui-textbox" name="paadmId" id="paadmId" data-options="cls:'hidden'"  th:value="${detail.paadmId}" />
+        <input class="easyui-textbox" name="mainId" id="mainId" data-options="cls:'hidden'"  th:value="${detail.mainId}" />
+        <!--<input class="easyui-textbox" name="id" id="id" data-options="cls:'hidden'"  th:value="${detail.id}" />-->
+
+    </form>
+
+    <script th:inline="javascript" type="text/javascript">
+
+        $(document).ready(function () {
+            var admId=$("#paadmId").val();
+            if(admId==""){
+                $("#paadmId").val("364598");
+            }
+        });
+        
+        function submitForm() {
+            $('#detail').form('submit',{
+                url:"/MedicalRescueDetail/save",
+                success:function(data){
+                    var data = eval('(' + data + ')');
+                    if(data.code==0){
+                        $.messager.show({
+                            title:'提示',
+                            msg:'保存成功。',
+                            timeout:2000,
+                            showType:'null',
+                            style:{
+
+                            }
+                        });
+                        $("#id").val(data.data);
+
+                    }else{
+                        $.messager.show({
+                            title:'提示',
+                            msg:data.msg,
+                            timeout:2000,
+                            showType:'null',
+                            style:{
+
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        function clearForm() {
+            $('#detail').form('clear');
+        }
+        
+    </script>
+
+</body>
+</html>

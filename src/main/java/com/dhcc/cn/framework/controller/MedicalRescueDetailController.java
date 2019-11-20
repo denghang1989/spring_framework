@@ -7,18 +7,15 @@ import com.dhcc.cn.framework.dto.result.ResultStatus;
 import com.dhcc.cn.framework.pojo.mysql.MedicalRescueDetail;
 import com.dhcc.cn.framework.service.mysql.MedicalRescueDetailServiceImpl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,10 +28,26 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Controller
 @Slf4j
+@RequestMapping("/MedicalRescueDetail")
 public class MedicalRescueDetailController {
 
     @Autowired
     MedicalRescueDetailServiceImpl mService;
+
+    @GetMapping("/rescue/detail")
+    public String medicalRescueDetail(@RequestParam String rescueId,String detailId, Model model){
+
+        MedicalRescueDetailForm detailForm;
+        if(StringUtils.isEmpty(detailId)){
+            detailForm=new MedicalRescueDetailForm();
+            detailForm.setMainId(Long.valueOf(rescueId));
+        }else{
+            detailForm=queryById(Long.valueOf(detailId));
+        }
+        model.addAttribute("detail",detailForm);
+
+        return "rescue/detail";
+    }
 
     @PostMapping("/save")
     @ResponseBody

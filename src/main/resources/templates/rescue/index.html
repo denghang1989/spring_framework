@@ -34,6 +34,10 @@
             font-size: 16px;
         }
 
+        .hidden{
+            display:none
+        }
+
     </style>
 
 </head>
@@ -47,7 +51,7 @@
             <label class="textbox-label" for="organization" style="text-align: left;width: 100px;">报告单位：</label>
             <input class="easyui-textbox" name="organization" id="organization" style="width:300px" th:value="${rescue.organization}" data-options="required:true" />
             <label class="textbox-label" for="reportDatetime" style="text-align: left;width: 100px;margin-left: 50px;">报告时间：</label>
-            <input class="easyui-datetimebox" name="reportDatetime" id="reportDatetime" style="width:200px" th:value="${rescue.reportDatetime}" data-options="required:true"/>
+            <input class="easyui-datetimebox" name="reportDatetime" id="reportDatetime" style="width:200px" th:value="${#dates.format(rescue.reportDatetime,'yyyy-MM-dd HH:mm:ss')}" data-options="required:true"/>
         </div>
 
         <div>
@@ -80,11 +84,11 @@
 
                     <div style="margin-top: 10px;margin-left: 80px;">
                         <label class="textbox-label" for="occurrenceDatetime" style="text-align: left;width: 100px;">发生时间：</label>
-                        <input class="easyui-datetimebox" name="occurrenceDatetime" id="occurrenceDatetime" style="width:200px" th:value="${rescue.occurrenceDatetime}" data-options="required:true" />
+                        <input class="easyui-datetimebox" name="occurrenceDatetime" id="occurrenceDatetime" style="width:200px" th:value="${#dates.format(rescue.occurrenceDatetime,'yyyy-MM-dd HH:mm:ss')}" data-options="required:true" />
                         <label class="textbox-label" for="occurrenceAddress" style="text-align: left;width: 100px;margin-left: 50px;">发生地点：</label>
                         <input class="easyui-textbox" name="occurrenceAddress" id="occurrenceAddress" style="width:250px" th:value="${rescue.occurrenceAddress}" />
                         <label class="textbox-label" for="paadmDatetime" style="text-align: left;width: 100px;margin-left: 50px;">入院时间：</label>
-                        <input class="easyui-datetimebox" name="paadmDatetime" id="paadmDatetime" style="width:200px" th:value="${rescue.paadmDatetime}" data-options="required:true" />
+                        <input class="easyui-datetimebox" name="paadmDatetime" id="paadmDatetime" style="width:200px" th:value="${#dates.format(rescue.paadmDatetime,'yyyy-MM-dd HH:mm:ss')}" data-options="required:true" />
                     </div>
 
                     <div style="margin-top: 10px;margin-left: 80px;">
@@ -159,25 +163,26 @@
                         <label class="textbox-label" for="additionalResources" style="text-align: left;width: 150px;margin-left: 30px;">请求增援的资源：</label>
                         <input class="easyui-textbox" name="additionalResources" id="additionalResources" style="width:30%;height: 80px;" data-options="multiline:true" th:value="${rescue.additionalResources}" />
 
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-save'" style="margin-left:120px;width:120px;height: 40px;font-size: 20px;">保存提交</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" data-options="iconCls:'icon-redo'" style="margin-left:10px;width:120px;height: 40px;font-size: 20px;">清屏</a>
-
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-save'" style="margin-left:100px;width:120px;height: 40px;font-size: 20px;">保存提交</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" data-options="iconCls:'icon-redo'" style="margin-left:10px;width:90px;height: 40px;font-size: 20px;">清屏</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="detailForm()" data-options="iconCls:'icon-add'" style="margin-left:10px;width:100px;height: 40px;font-size: 20px;">救治情况</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <input class="easyui-textbox" name="createUser" id="createUser"  th:value="${userId}" />
-
+        <input class="easyui-textbox" name="createUser" id="createUser" data-options="cls:'hidden'"  th:value="${userId}" />
+        <input class="easyui-textbox" name="id" id="id" data-options="cls:'hidden'"  th:value="${rescue.id}" />
     </form>
+
+    <div id="detail-dailog"></div>
+
 <script th:inline="javascript" type="text/javascript">
 
     $(document).ready(function () {
 
         var level=$("#eventLevel").attr("sel");
         $("#eventLevel").combobox("select",level);
-
-        $("#createUser").next().hide();
 
     });
 
@@ -196,6 +201,8 @@
 
                         }
                     });
+                    $("#id").val(data.data);
+                    window.location.href="/MedicalRescue/rescue/index?userId="+$("#createUser").val()+"&rescueId="+$("#id").val();
                 }else{
                     $.messager.show({
                         title:'提示',
@@ -212,6 +219,23 @@
     }
     function clearForm(){
         $('#rescue').form('clear');
+    }
+    
+    function detailForm() {
+
+        var url="/MedicalRescueDetail/rescue/detail?rescueId="+$("#id").val();
+        //window.open(url,"detail","toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbar=yes,resizable=no,height=550,width=700,top=50,left=450")
+
+        $('#detail-dailog').dialog({
+            title: '宝安区突发事件伤病员院内救治情况',
+            width: 1000,
+            height: 400,
+            closed: false,
+            cache: false,
+            href: url,
+            modal: true
+        });
+
     }
 
 </script>
