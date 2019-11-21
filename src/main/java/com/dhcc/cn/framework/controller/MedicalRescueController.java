@@ -2,6 +2,7 @@ package com.dhcc.cn.framework.controller;
 
 import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.MedicalRescueForm;
+import com.dhcc.cn.framework.dto.result.DataGridResult;
 import com.dhcc.cn.framework.service.mysql.MedicalRescueServiceImpl;
 
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +36,13 @@ public class MedicalRescueController {
         return "rescue/index";
     }
 
+    @GetMapping("/rescue/dataList")
+    public String medicalRescueList(@RequestParam String userId, Model model){
+
+        model.addAttribute("userId",userId);
+        return "rescue/dataList";
+    }
+
     @PostMapping("/save")
     @ResponseResultBody
     @ResponseBody
@@ -62,4 +70,19 @@ public class MedicalRescueController {
     public List<MedicalRescueForm> getMedicalRescueListByDates(Date startDate, Date endDate){
         return mService.getMedicalRescueListByDates(startDate,endDate);
     }
+
+    @GetMapping("/dateGrid")
+    @ResponseBody
+    public DataGridResult getMedicalRescueDataGridByDates(Date startDate, Date endDate){
+        List<MedicalRescueForm> list = mService.getMedicalRescueListByDates(startDate,endDate);
+        return new DataGridResult(list.size(),list);
+    }
+
+    @GetMapping("/remove/{id}")
+    @ResponseResultBody
+    @ResponseBody
+    public long deleteById(@PathVariable("id") long id){
+        return mService.delete(id);
+    }
+
 }

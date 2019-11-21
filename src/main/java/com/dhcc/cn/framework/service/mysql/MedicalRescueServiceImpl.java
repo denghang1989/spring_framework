@@ -59,4 +59,9 @@ public class MedicalRescueServiceImpl {
             return form;
         }).collect(Collectors.toList());
     }
+
+    public int delete(long id) {
+        int deleteById = mMapper.deleteById(id);
+        return deleteById;
+    }
 }
