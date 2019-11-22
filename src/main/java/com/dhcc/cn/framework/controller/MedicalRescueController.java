@@ -4,6 +4,7 @@ import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.MedicalRescueForm;
 import com.dhcc.cn.framework.dto.result.DataGridResult;
 import com.dhcc.cn.framework.service.mysql.MedicalRescueServiceImpl;
+import com.dhcc.cn.framework.vo.MedicalRescueVo;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ public class MedicalRescueController {
 
     @GetMapping("/rescue/index")
     public String medicalRescue(@RequestParam String userId, String rescueId, Model model){
-
         MedicalRescueForm rescueForm;
         if(StringUtils.isEmpty(rescueId)){
             rescueForm=new MedicalRescueForm();
@@ -32,13 +32,11 @@ public class MedicalRescueController {
         }
         model.addAttribute("userId",userId);
         model.addAttribute("rescue",rescueForm);
-
         return "rescue/index";
     }
 
     @GetMapping("/rescue/dataList")
     public String medicalRescueList(@RequestParam String userId, Model model){
-
         model.addAttribute("userId",userId);
         return "rescue/dataList";
     }
@@ -75,7 +73,7 @@ public class MedicalRescueController {
     @ResponseBody
     public DataGridResult getMedicalRescueDataGridByDates(Date startDate, Date endDate){
         List<MedicalRescueForm> list = mService.getMedicalRescueListByDates(startDate,endDate);
-        return new DataGridResult(list.size(),list);
+        return new DataGridResult<MedicalRescueForm>(list.size(),list);
     }
 
     @GetMapping("/remove/{id}")
@@ -83,6 +81,14 @@ public class MedicalRescueController {
     @ResponseBody
     public long deleteById(@PathVariable("id") long id){
         return mService.delete(id);
+    }
+
+    @GetMapping("/reportDate")
+    @ResponseResultBody
+    @ResponseBody
+    public List<MedicalRescueVo> getListByDates(Date startDate, Date endDate) {
+        List<MedicalRescueVo> medicalRescueVos = mService.getListByDates(startDate, endDate);
+        return medicalRescueVos;
     }
 
 }

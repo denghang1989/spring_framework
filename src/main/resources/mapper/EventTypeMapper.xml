@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.cn.framework.mapper.EventTypeMapper">
+
+    <resultMap id="EventType" type="com.dhcc.cn.framework.pojo.mysql.EventType">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="active" property="active"/>
+    </resultMap>
+
+    <select id="findEventTypeById" resultType="string" >
+        select t.name from study.event_type as t where id=#{id}
+    </select>
+
+</mapper>

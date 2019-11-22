@@ -1,47 +1,32 @@
-package com.dhcc.cn.framework.dto;
+package com.dhcc.cn.framework.vo;
 
-import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
 
 import lombok.Data;
 
 @Data
-public class MedicalRescueForm {
-
+public class MedicalRescueVo {
     private long id;
 
-    @NotEmpty(message = "报告单位不能为空")
-    @Length(min = 1,max = 50)
     private String organization;
 
-    @NotEmpty(message = "报告日期不能为空")
-    @Past
     private Date reportDatetime;
 
-    @NotEmpty(message = "报告人不能为空")
-    @Length(min = 1,max = 50)
     private String reporter;
 
     private String phone;
 
     private String approver;
 
-    private long eventType;
+    private String eventTypeName;
 
-    private long eventLevel;
+    private String eventLevelName;
 
-    @NotEmpty(message = "发生时间")
-    @Past
     private Date occurrenceDatetime;
 
     private String occurrenceAddress;
 
-    @NotEmpty(message = "入院时间")
-    @Past
     private Date paadmDatetime;
 
     private String eventDesc;

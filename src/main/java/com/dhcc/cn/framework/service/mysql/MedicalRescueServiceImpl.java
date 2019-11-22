@@ -1,10 +1,16 @@
 package com.dhcc.cn.framework.service.mysql;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dhcc.cn.framework.dto.MedicalRescueForm;
+import com.dhcc.cn.framework.mapper.EventLeverMapper;
 import com.dhcc.cn.framework.mapper.MedicalRescueMapper;
+import com.dhcc.cn.framework.pojo.mysql.EventLever;
 import com.dhcc.cn.framework.pojo.mysql.MedicalRescue;
+import com.dhcc.cn.framework.vo.MedicalRescueVo;
 
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,4 +70,27 @@ public class MedicalRescueServiceImpl {
         int deleteById = mMapper.deleteById(id);
         return deleteById;
     }
+
+    /**
+     * @param startDate
+     * @param endDate
+     * @param page
+     * @param rows
+     * @return
+     * @desc 分页查询
+     */
+    public IPage<MedicalRescue> getMedicalRescueList(Date startDate, Date endDate,int page,int rows){
+        Page<MedicalRescue> medicalRescuePage = new Page<>(page,rows);
+        QueryWrapper<MedicalRescue> medicalRescueQueryWrapper = new QueryWrapper<>();
+        medicalRescueQueryWrapper.lambda().ge(MedicalRescue::getCreateDatetime,startDate).le(MedicalRescue::getCreateDatetime,endDate);
+        IPage<MedicalRescue> selectPage = mMapper.selectPage(medicalRescuePage, medicalRescueQueryWrapper);
+        return selectPage;
+    }
+
+
+    public List<MedicalRescueVo> getListByDates(Date startDate, Date endDate) {
+        List<MedicalRescueVo> medicalRescueVos = mMapper.findByDate(startDate, endDate);
+        return medicalRescueVos;
+    }
+
 }

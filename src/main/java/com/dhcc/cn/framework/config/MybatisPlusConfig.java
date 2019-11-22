@@ -1,5 +1,6 @@
 package com.dhcc.cn.framework.config;
 
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.dhcc.cn.framework.enums.DBTypeEnum;
 import com.dhcc.cn.framework.multiple.CacheDataSourceConfig;
@@ -66,6 +67,16 @@ public class MybatisPlusConfig {
         sqlSessionFactory.setDataSource(multipleDataSource(mysql(), cache()));
         sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:/mapper/**.xml"));
         return sqlSessionFactory.getObject();
+    }
+
+    /**
+     * @return
+     * @desc 添加分页插件
+     */
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
+        return paginationInterceptor;
     }
 
 }
