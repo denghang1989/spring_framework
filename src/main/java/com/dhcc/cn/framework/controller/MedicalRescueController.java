@@ -88,8 +88,9 @@ public class MedicalRescueController {
     @GetMapping("/dateGrid")
     @ResponseBody
     public DataGridResult getMedicalRescueDataGridByDates(Date startDate, Date endDate){
-        List<MedicalRescueForm> list = mService.getMedicalRescueListByDates(startDate,endDate);
-        return new DataGridResult<MedicalRescueForm>(list.size(),list);
+        //List<MedicalRescueForm> list = mService.getMedicalRescueListByDates(startDate,endDate);
+        List<MedicalRescueVo> list = mService.getListByDates(startDate, endDate);
+        return new DataGridResult<MedicalRescueVo>(list.size(),list);
     }
 
     @GetMapping("/remove/{id}")

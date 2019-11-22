@@ -207,7 +207,7 @@
     <div id="tb" style="padding:2px 5px;margin: 5px;">
         <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="search" onclick="rescueDetailLoad();return false;">查询</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addDetail();return false;">新增</a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editDetail();return false;">修改</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editDetailEvent();return false;">修改</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="deleteDetail();return false;">删除</a>
     </div>
 
@@ -224,12 +224,22 @@
         $("#eventType").combobox("select",type);
 
         rescueDetailLoad();
+        gridDbClickEvent();
     });
 
     function rescueDetailLoad() {
 
         $('#detailList').datagrid('load', {
             mainId: $("#mainId").val()
+        });
+    }
+
+    function gridDbClickEvent() {
+        $('#detailList').datagrid({
+            onDblClickRow: function(index,row){
+                var id=row.id;
+                editDetail(id);
+            }
         });
     }
 
@@ -299,14 +309,12 @@
         }
     }
 
-    function editDetail() {
+    function editDetail(id) {
 
-        var id=getSelected()
         if(id==""){
             $.messager.alert('温馨提示', "请先选择一项纪录再修改");
             return;
         }
-
         var url="/MedicalRescueDetail/rescue/detail?rescueId="+$("#mainId").val()+"&detailId="+id;
 
         $('#detail-dailog').dialog({
@@ -318,6 +326,11 @@
             href: url,
             modal: true
         });
+    }
+
+    function editDetailEvent() {
+        var id=getSelected()
+        editDetail(id);
     }
 
     function deleteDetail() {

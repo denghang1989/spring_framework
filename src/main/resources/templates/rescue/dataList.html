@@ -40,8 +40,8 @@
            data-options="rownumbers:true,singleSelect:true,url:'/MedicalRescue/dateGrid',method:'get',toolbar:'#tb'">
         <thead>
         <tr>
-            <th data-options="field:'eventType',width:100,align:'center'">类型</th>
-            <th data-options="field:'eventLevel',width:80,align:'center'">分级</th>
+            <th data-options="field:'eventTypeName',width:100,align:'center'">类型</th>
+            <th data-options="field:'eventLevelName',width:80,align:'center'">分级</th>
             <th data-options="field:'occurrenceDatetime',width:150,align:'center'">发生时间</th>
             <th data-options="field:'occurrenceAddress',width:300,align:'center'">发生地点</th>
             <th data-options="field:'paadmDatetime',width:150,align:'center'">入院时间</th>
@@ -56,7 +56,7 @@
         至: <input class="easyui-datebox" id="endDate" th:value="${#dates.createToday()}" style="width:130px">
         <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="dataLoad()">查询</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addRescue()">新增</a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editRescue()">修改</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editEvent()">修改</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="deleteRescue()">删除</a>
     </div>
 
@@ -66,6 +66,7 @@
 
         $(document).ready(function () {
             dataLoad();
+            gridDbClickEvent();
         });
 
         function dataLoad() {
@@ -75,18 +76,33 @@
                 endDate: $("#endDate").val()
             });
         }
+
+        function gridDbClickEvent() {
+            $('#dataList').datagrid({
+                onDblClickRow: function(index,row){
+                    var id=row.id;
+                    editRescue(id);
+                }
+            });
+        }
         
         function addRescue() {
 
             var url="/MedicalRescue/rescue/index?userId="+$("#userId").val();
             var width=($(window).width())*0.85;
             var height=($(window).height())*0.85;
-            window.open(url,"rescue","toolbar=no,location=yes,directories=yes,status=yes,menubar=no,scrollbar=yes,resizable=no,height="+height+",width="+width+",top=100,left=100")
+            var page=window.open(url,"rescue","toolbar=no,location=yes,directories=yes,status=yes,menubar=no,scrollbar=yes,resizable=no,height="+height+",width="+width+",top=100,left=100")
+            page.onload = function(){
+                // unload事件放在load事件中是因为直接监听unload事件，页面在打开时会直接触发一次unload事件
+                page.onunload = function(){
+                    // 此处写close事件回调
+                    dataLoad();
+                }
+            }
         }
 
-        function editRescue() {
+        function editRescue(id) {
 
-            var id=getSelected()
             if(id==""){
                 $.messager.alert('温馨提示', "请先选择一项纪录再修改");
                 return;
@@ -94,7 +110,20 @@
             var url="/MedicalRescue/rescue/index?userId="+$("#userId").val()+"&rescueId="+id;
             var width=($(window).width())*0.85;
             var height=($(window).height())*0.85;
-            window.open(url,"rescue","toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbar=yes,resizable=no,height="+height+",width="+width+",top=100,left=100")
+            var page=window.open(url,"rescue","toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbar=yes,resizable=no,height="+height+",width="+width+",top=100,left=100")
+
+            page.onload = function(){
+                // unload事件放在load事件中是因为直接监听unload事件，页面在打开时会直接触发一次unload事件
+                page.onunload = function(){
+                    // 此处写close事件回调
+                    dataLoad();
+                }
+            }
+        }
+
+        function editEvent() {
+            var id=getSelected()
+            editRescue(id);
         }
         
         function deleteRescue() {

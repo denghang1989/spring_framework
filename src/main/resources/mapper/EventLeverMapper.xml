@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dhcc.cn.framework.mapper.EventLeverMapper">
+<mapper namespace="com.dhcc.cn.framework.mapper.EventLevelMapper">
 
-    <resultMap id="EventLever" type="com.dhcc.cn.framework.pojo.mysql.EventLever">
+    <resultMap id="EventLevel" type="com.dhcc.cn.framework.pojo.mysql.EventLevel">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="code" property="code"/>

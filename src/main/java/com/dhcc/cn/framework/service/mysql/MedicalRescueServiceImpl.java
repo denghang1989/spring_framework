@@ -4,13 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dhcc.cn.framework.dto.MedicalRescueForm;
-import com.dhcc.cn.framework.mapper.EventLeverMapper;
 import com.dhcc.cn.framework.mapper.MedicalRescueMapper;
-import com.dhcc.cn.framework.pojo.mysql.EventLever;
 import com.dhcc.cn.framework.pojo.mysql.MedicalRescue;
 import com.dhcc.cn.framework.vo.MedicalRescueVo;
 
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
