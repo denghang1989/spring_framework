@@ -2,6 +2,7 @@ package com.dhcc.cn.framework.controller;
 
 import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.MedicalRescueDetailForm;
+import com.dhcc.cn.framework.dto.result.DataGridResult;
 import com.dhcc.cn.framework.dto.result.Result;
 import com.dhcc.cn.framework.dto.result.ResultStatus;
 import com.dhcc.cn.framework.pojo.mysql.MedicalRescueDetail;
@@ -94,6 +95,13 @@ public class MedicalRescueDetailController {
             BeanUtils.copyProperties(medicalRescueDetail, form);
             return Result.success(form);
         }).orElse(Result.error(ResultStatus.DATA_ERROR));
+    }
+
+    @GetMapping("/get/dataGrid")
+    @ResponseBody
+    public DataGridResult queryByMainIdDataGrid(@RequestParam String mainId){
+        List<MedicalRescueDetailForm> list = mService.getAllByMainId(mainId);
+        return new DataGridResult(list.size(),list);
     }
 
 }

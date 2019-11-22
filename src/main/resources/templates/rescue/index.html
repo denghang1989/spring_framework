@@ -38,6 +38,11 @@
             display:none
         }
 
+        .myTable{
+            margin-left: 50px;
+            margin-top: 10px;
+        }
+
     </style>
 
 </head>
@@ -69,15 +74,19 @@
                     <label class="textbox-label" style="text-align: left;width: 400px;font-size: 28px">突 发 公 共 事 件 信 息</label>
                     <div style="margin-top: 10px;margin-left: 80px;">
                         <label class="textbox-label" for="eventType" style="text-align: left;width: 100px;">事件类型：</label>
-                        <input class="easyui-textbox" name="eventType" id="eventType" style="width:200px" />
+                        <!--<input class="easyui-textbox" name="eventType" id="eventType" style="width:200px" />-->
+                        <select class="easyui-combobox" name="eventType" id="eventType" style="width:120px" th:sel="${rescue.eventType}" >
+                            <option th:value="0"></option>
+                            <option th:each="type:${typeList}" th:value="${type.id}" th:text="${type.name}"></option>
+
+                        </select>
 
                         <label class="textbox-label" for="eventLevel" style="text-align: left;width: 100px;margin-left: 50px;">事件分级：</label>
                         <select class="easyui-combobox" name="eventLevel" id="eventLevel" style="width:100px" th:sel="${rescue.eventLevel}" >
-                            <option value="0"></option>
-                            <option value="1">Ⅰ级</option>
-                            <option value="2">Ⅱ级</option>
-                            <option value="3">Ⅲ级</option>
-                            <option value="4">Ⅳ级</option>
+
+                            <option th:value="0"></option>
+                            <option th:each="level:${levelList}" th:value="${level.id}" th:text="${level.name}"></option>
+
                         </select>
                         <label class="textbox-label"  style="text-align: left;width: 80px;">级</label>
                     </div>
@@ -165,15 +174,42 @@
 
                         <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" data-options="iconCls:'icon-save'" style="margin-left:100px;width:120px;height: 40px;font-size: 20px;">保存提交</a>
                         <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" data-options="iconCls:'icon-redo'" style="margin-left:10px;width:90px;height: 40px;font-size: 20px;">清屏</a>
-                        <a href="javascript:void(0)" class="easyui-linkbutton" onclick="detailForm()" data-options="iconCls:'icon-add'" style="margin-left:10px;width:100px;height: 40px;font-size: 20px;">救治情况</a>
+                        <!--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="detailForm()" data-options="iconCls:'icon-add'" style="margin-left:10px;width:100px;height: 40px;font-size: 20px;">救治情况</a>-->
                     </div>
                 </div>
             </div>
         </div>
 
         <input class="easyui-textbox" name="createUser" id="createUser" data-options="cls:'hidden'"  th:value="${userId}" />
-        <input class="easyui-textbox" name="id" id="id" data-options="cls:'hidden'"  th:value="${rescue.id}" />
+        <input class="easyui-textbox" name="mainId" id="mainId" data-options="cls:'hidden'"  th:value="${rescue.id}" />
     </form>
+
+    <table id="detailList" class="easyui-datagrid" title="事件伤病员院内救治情况表" style="height:600px"
+           data-options="rownumbers:true,singleSelect:true,url:'/MedicalRescueDetail/get/dataGrid',method:'get',cls:'myTable',toolbar:'#tb'">
+        <thead>
+        <tr>
+            <th data-options="field:'patName',width:80,align:'center'">姓名</th>
+            <th data-options="field:'patSex',width:60,align:'center'">性别</th>
+            <th data-options="field:'patAge',width:50,align:'center'">年龄</th>
+            <th data-options="field:'patNation',width:80,align:'center'">民族</th>
+            <th data-options="field:'patOccupation',width:120,align:'center'">职业</th>
+            <th data-options="field:'patDiag',width:200,align:'center'">初步诊断</th>
+            <th data-options="field:'patAdmloc',width:150,align:'center'">收治科室</th>
+            <th data-options="field:'patLevel',width:80,align:'center'">病情分级</th>
+            <th data-options="field:'patReturn',width:80,align:'center'">转归情况</th>
+            <th data-options="field:'patConsult',width:120,align:'center'">会诊专家</th>
+            <th data-options="field:'patTrans',width:180,align:'center'">拟转医院及科室</th>
+            <th data-options="field:'id',width:60,align:'center'">id</th>
+        </tr>
+        </thead>
+    </table>
+
+    <div id="tb" style="padding:2px 5px;margin: 5px;">
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search" id="search" onclick="rescueDetailLoad();return false;">查询</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addDetail();return false;">新增</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editDetail();return false;">修改</a>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" onclick="deleteDetail();return false;">删除</a>
+    </div>
 
     <div id="detail-dailog"></div>
 
@@ -184,7 +220,18 @@
         var level=$("#eventLevel").attr("sel");
         $("#eventLevel").combobox("select",level);
 
+        var type=$("#eventType").attr("sel");
+        $("#eventType").combobox("select",type);
+
+        rescueDetailLoad();
     });
+
+    function rescueDetailLoad() {
+
+        $('#detailList').datagrid('load', {
+            mainId: $("#mainId").val()
+        });
+    }
 
     function submitForm(){
         $('#rescue').form('submit',{
@@ -201,8 +248,8 @@
 
                         }
                     });
-                    $("#id").val(data.data);
-                    window.location.href="/MedicalRescue/rescue/index?userId="+$("#createUser").val()+"&rescueId="+$("#id").val();
+                    $("#mainId").val(data.data);
+                    window.location.href="/MedicalRescue/rescue/index?userId="+$("#createUser").val()+"&rescueId="+$("#mainId").val();
                 }else{
                     $.messager.show({
                         title:'提示',
@@ -221,10 +268,46 @@
         $('#rescue').form('clear');
     }
     
-    function detailForm() {
+    function addDetail() {
 
-        var url="/MedicalRescueDetail/rescue/detail?rescueId="+$("#id").val();
+        //var top=$("#search").offset().top;
+        //var left=$("#search").offset().left;
+
+        var url="/MedicalRescueDetail/rescue/detail?rescueId="+$("#mainId").val();
         //window.open(url,"detail","toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbar=yes,resizable=no,height=550,width=700,top=50,left=450")
+
+        $('#detail-dailog').dialog({
+            title: '宝安区突发事件伤病员院内救治情况',
+            width: 1000,
+            height: 400,
+            closed: false,
+            cache: false,
+            href: url,
+            modal: true,
+            onClose: function () {
+                rescueDetailLoad();
+            }
+        });
+    }
+
+    function getSelected(){
+        var row = $('#detailList').datagrid('getSelected');
+        if(row){
+            return row.id;
+        }else{
+            return "";
+        }
+    }
+
+    function editDetail() {
+
+        var id=getSelected()
+        if(id==""){
+            $.messager.alert('温馨提示', "请先选择一项纪录再修改");
+            return;
+        }
+
+        var url="/MedicalRescueDetail/rescue/detail?rescueId="+$("#mainId").val()+"&detailId="+id;
 
         $('#detail-dailog').dialog({
             title: '宝安区突发事件伤病员院内救治情况',
@@ -235,7 +318,41 @@
             href: url,
             modal: true
         });
+    }
 
+    function deleteDetail() {
+        var id=getSelected()
+        if(id==""){
+            $.messager.alert('温馨提示', "请先选择一项纪录再删除");
+            return;
+        }else{
+
+            $.get("/MedicalRescueDetail/remove/"+id,function (data) {
+                //var data = eval('(' + data + ')');
+                if(data.code==0){
+                    $.messager.show({
+                        title:'提示',
+                        msg:'删除成功。',
+                        timeout:1000,
+                        showType:'null',
+                        style:{
+
+                        }
+                    });
+                    rescueDetailLoad();
+                }else{
+                    $.messager.show({
+                        title:'提示',
+                        msg:data.msg,
+                        timeout:1000,
+                        showType:'null',
+                        style:{
+
+                        }
+                    });
+                }
+            });
+        }
     }
 
 </script>

@@ -3,6 +3,10 @@ package com.dhcc.cn.framework.controller;
 import com.dhcc.cn.framework.annotation.ResponseResultBody;
 import com.dhcc.cn.framework.dto.MedicalRescueForm;
 import com.dhcc.cn.framework.dto.result.DataGridResult;
+import com.dhcc.cn.framework.mapper.EventLevelMapper;
+import com.dhcc.cn.framework.mapper.EventTypeMapper;
+import com.dhcc.cn.framework.pojo.mysql.EventLevel;
+import com.dhcc.cn.framework.pojo.mysql.EventType;
 import com.dhcc.cn.framework.service.mysql.MedicalRescueServiceImpl;
 import com.dhcc.cn.framework.vo.MedicalRescueVo;
 
@@ -22,6 +26,12 @@ public class MedicalRescueController {
     @Autowired
     MedicalRescueServiceImpl mService;
 
+    @Autowired
+    EventLevelMapper mEventLevelMapper;
+
+    @Autowired
+    EventTypeMapper mEventTypeMapper;
+
     @GetMapping("/rescue/index")
     public String medicalRescue(@RequestParam String userId, String rescueId, Model model){
         MedicalRescueForm rescueForm;
@@ -30,6 +40,12 @@ public class MedicalRescueController {
         }else{
             rescueForm=getMedicalRescueById(Integer.valueOf(rescueId));
         }
+
+        List<EventLevel> level=mEventLevelMapper.selectList(null);
+        List<EventType> type=mEventTypeMapper.selectList(null);
+
+        model.addAttribute("levelList",level);
+        model.addAttribute("typeList",type);
         model.addAttribute("userId",userId);
         model.addAttribute("rescue",rescueForm);
         return "rescue/index";

@@ -47,7 +47,7 @@
             <th data-options="field:'paadmDatetime',width:150,align:'center'">入院时间</th>
             <th data-options="field:'reportDatetime',width:150,align:'center'">报告时间</th>
             <th data-options="field:'eventDesc',width:500,align:'center'">简要经过</th>
-            <th data-options="field:'id',width:30,align:'center'">id</th>
+            <th data-options="field:'id',width:60,align:'center'">id</th>
         </tr>
         </thead>
     </table>
@@ -81,7 +81,7 @@
             var url="/MedicalRescue/rescue/index?userId="+$("#userId").val();
             var width=($(window).width())*0.85;
             var height=($(window).height())*0.85;
-            window.open(url,"rescue","toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbar=yes,resizable=no,height="+height+",width="+width+",top=100,left=100")
+            window.open(url,"rescue","toolbar=no,location=yes,directories=yes,status=yes,menubar=no,scrollbar=yes,resizable=no,height="+height+",width="+width+",top=100,left=100")
         }
 
         function editRescue() {

@@ -1,9 +1,9 @@
 package com.dhcc.cn.framework.controller;
 
 import com.dhcc.cn.framework.annotation.ResponseResultBody;
-import com.dhcc.cn.framework.mapper.EventLeverMapper;
+import com.dhcc.cn.framework.mapper.EventLevelMapper;
 import com.dhcc.cn.framework.mapper.EventTypeMapper;
-import com.dhcc.cn.framework.pojo.mysql.EventLever;
+import com.dhcc.cn.framework.pojo.mysql.EventLevel;
 import com.dhcc.cn.framework.pojo.mysql.EventType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +19,14 @@ import java.util.List;
 public class MedicalEvent {
 
     @Autowired
-    EventLeverMapper mEventLeverMapper;
+    EventLevelMapper mEventLevelMapper;
 
     @Autowired
     EventTypeMapper mEventTypeMapper;
 
-    @GetMapping("/all/lever")
-    public List<EventLever> getAllEventLever(){
-        return mEventLeverMapper.selectList(null);
+    @GetMapping("/all/level")
+    public List<EventLevel> getAllEventLever(){
+        return mEventLevelMapper.selectList(null);
     }
 
     @GetMapping("/all/type")
