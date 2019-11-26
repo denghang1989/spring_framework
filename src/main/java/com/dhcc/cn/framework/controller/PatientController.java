@@ -28,7 +28,7 @@ public class PatientController {
     }
 
     /**
-     * @param regNo 住院号
+     * @param regNo 登记号
      * @return
      */
     @GetMapping("/regNo/{regNo}")
@@ -47,11 +47,11 @@ public class PatientController {
     }
 
     /**
-     * @param PAPMINo 登记号
+     * @param medCareNo 住院号
      * @return
      */
-    @GetMapping("/PAPMINo/{PAPMINo}")
-    PatientInfo getPatientByPAPMINo(@PathVariable("PAPMINo") String PAPMINo) {
-        return mService.getPatientByPAPMINo(PAPMINo);
+    @GetMapping("/medCareNo/{medCareNo}")
+    PatientInfo getPatientByMedCareNo(@PathVariable("medCareNo") String medCareNo) {
+        return mService.getPatientByMedCareNo(medCareNo);
     }
 }

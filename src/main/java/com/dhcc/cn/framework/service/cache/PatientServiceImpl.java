@@ -21,11 +21,11 @@ public class PatientServiceImpl {
     }
 
     /**
-     * @param regNo 住院号
+     * @param medCareNo 住院号
      * @return
      */
-    public PatientInfo getPatientByRegNo(String regNo) {
-        return mMapper.getPatientByRegNo(regNo);
+    public PatientInfo getPatientByMedCareNo(String medCareNo) {
+        return mMapper.getPatientByMedCareNo(medCareNo);
     }
 
 
@@ -38,10 +38,10 @@ public class PatientServiceImpl {
     }
 
     /**
-     * @param PAPMINo 登记号
+     * @param regNo 登记号
      * @return
      */
-    public PatientInfo getPatientByPAPMINo(String PAPMINo) {
-        return mMapper.getPatientByPAPMINo(PAPMINo);
+    public PatientInfo getPatientByRegNo(String regNo) {
+        return mMapper.getPatientByRegNo(regNo);
     }
 }

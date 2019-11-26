@@ -16,10 +16,10 @@ public interface PatientMapper {
     PatientInfo getPatientById(@Param("patientId") String patientId);
 
     /**
-     * @param regNo 住院号
+     * @param medCareNo 住院号
      * @return
      */
-    PatientInfo getPatientByRegNo(@Param("regNo") String regNo);
+    PatientInfo getPatientByMedCareNo(@Param("medCareNo") String medCareNo);
 
 
     /**
@@ -29,8 +29,8 @@ public interface PatientMapper {
     PatientInfo getPatientByEposideId(@Param("eposideId") String eposideId);
 
     /**
-     * @param PAPMINo 登记号
+     * @param regNo 登记号
      * @return
      */
-    PatientInfo getPatientByPAPMINo(@Param("PAPMINo")String PAPMINo);
+    PatientInfo getPatientByRegNo(@Param("regNo")String regNo);
 }
