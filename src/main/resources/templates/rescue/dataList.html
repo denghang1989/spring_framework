@@ -9,7 +9,7 @@
     <link th:href="@{/easyui/themes/default/easyui.css}" rel="stylesheet" type="text/css"/>                 <!-- easyui核心UI文件 css -->
     <link th:href="@{/easyui/themes/icon.css}" rel="stylesheet" type="text/css"/>                           <!-- easyui图标 -->
     <script th:src="@{/easyui/locale/easyui-lang-zh_CN.js}" type="text/javascript" charset="utf-8"></script>
-
+    <script th:src="@{/js/date_prototype.js}" type="text/javascript" charset="utf-8"></script>
     <style>
 
         body{
@@ -53,7 +53,7 @@
     </table>
     <div id="tb" style="padding:2px 5px;margin: 5px;">
         日期: <input class="easyui-datebox" id="startDate" th:value="${#dates.createToday()}" style="width:130px">
-        至: <input class="easyui-datebox" id="endDate" th:value="${#dates.createToday()}" style="width:130px">
+        至: <input class="easyui-datebox" id="endDate"  style="width:130px">
         <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="dataLoad()">查询</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addRescue()">新增</a>
         <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="editEvent()">修改</a>
@@ -65,6 +65,9 @@
     <script th:inline="javascript" type="text/javascript">
 
         $(document).ready(function () {
+
+            //$("#endDate").val(new Date().formatDate(new Date().addDate(1)));
+            $('#endDate').datebox('setValue', new Date().formatDate(new Date().addDate(1)));
             dataLoad();
             gridDbClickEvent();
         });

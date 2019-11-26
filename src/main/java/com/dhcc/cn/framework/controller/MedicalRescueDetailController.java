@@ -60,7 +60,7 @@ public class MedicalRescueDetailController {
     @PostMapping("/update")
     @ResponseBody
     @ResponseResultBody
-    public int update(MedicalRescueDetailForm form){
+    public long update(MedicalRescueDetailForm form){
         return mService.update(form);
     }
 

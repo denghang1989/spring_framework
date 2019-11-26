@@ -9,13 +9,15 @@ public class MedicalRescueDetailForm {
 
   private long mainId;
 
+  private String patRegNo;
+
   private String paadmId;
 
   private String patName;
 
   private String patSex;
 
-  private long patAge;
+  private String patAge;
 
   private String patNation;
 

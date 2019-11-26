@@ -34,6 +34,10 @@
 
     <form id="detail" method="post">
         <div>
+
+            <label class="textbox-label" for="patRegNo" style="text-align: left;width: 80px;">登记号：</label>
+            <input class="easyui-textbox" name="patRegNo" id="patRegNo" style="width:120px" th:value="${detail.patRegNo}" data-options="required:true" />
+
             <label class="textbox-label" for="patName" style="text-align: left;width: 60px;">姓名：</label>
             <input class="easyui-textbox" name="patName" id="patName" style="width:100px" th:value="${detail.patName}" data-options="required:true" />
 
@@ -97,25 +101,67 @@
 
         <input class="easyui-textbox" name="paadmId" id="paadmId" data-options="cls:'hidden'"  th:value="${detail.paadmId}" />
         <input class="easyui-textbox" name="mainId" id="mainId" data-options="cls:'hidden'"  th:value="${detail.mainId}" />
-        <!--<input class="easyui-textbox" name="id" id="id" data-options="cls:'hidden'"  th:value="${detail.id}" />-->
+        <input class="easyui-textbox" name="id" id="id" data-options="cls:'hidden'"  th:value="${detail.id}" />
 
     </form>
 
     <script th:inline="javascript" type="text/javascript">
 
         $(document).ready(function () {
-            var admId=$("#paadmId").val();
-            if(admId==""){
-                $("#paadmId").val("364598");
-            }
-
-            $("#patName").focus();
+            //$("#patRegNo").focus();
+            $('#patRegNo').textbox().next('span').find('input').focus();
+            $("#patSex").combobox("select",$("#patSex").attr("sel"));
+            $("#patLevel").combobox("select",$("#patLevel").attr("sel"));
+            $("#patReturn").combobox("select",$("#patReturn").attr("sel"));
 
         });
+
+        $(document).keydown(function(event){
+
+            if(event.keyCode == 13){                // 回车键
+                getPatInfo();
+            }
+        });
+
+        function getPatInfo() {
+            $.get("/patient/regNo/"+$("#patRegNo").val(),function (ret) {
+
+                if(ret.code==0){
+
+                    $("#patRegNo").textbox("setValue",ret.data.patRegNo);
+                    $("#patName").textbox("setValue",ret.data.patName);
+                    $("#patSex").combobox("select",ret.data.patSex);
+                    $("#patAge").textbox("setValue",ret.data.patAge);
+                    $("#patNation").textbox("setValue",ret.data.patNation);
+                    $("#patOccupation").textbox("setValue",ret.data.patOccupation);
+                    /* $("#patDiag").val(ret.data.patDiag);
+                     $("#patAdmloc").val(ret.data.patAdmloc);*/
+
+                }else{
+                    $.messager.show({
+                        title:'提示',
+                        msg:'获取患者信息失败',
+                        timeout:1000,
+                        showType:'null',
+                        style:{
+
+                        }
+                    });
+                }
+            });
+        }
         
         function submitForm() {
+
+            var url="";
+            if($("#id").val()>0){
+                url="/MedicalRescueDetail/update";
+            }else{
+                url="/MedicalRescueDetail/save";
+            }
+
             $('#detail').form('submit',{
-                url:"/MedicalRescueDetail/save",
+                url:url,
                 success:function(data){
                     var data = eval('(' + data + ')');
                     if(data.code==0){

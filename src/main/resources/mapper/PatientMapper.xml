@@ -8,19 +8,19 @@
     </resultMap>
 
     <select id="getPatientById" resultMap="patient" parameterType="string" statementType="CALLABLE">
-        {call GetPatBaseInfo(#{patientId,mode=IN},"patId")}
+        {call framework_procedure.PatBase_GetPatBaseInfo(#{patientId,mode=IN},"patId")}
     </select>
 
     <select id="getPatientByRegNo" resultMap="patient" parameterType="string" statementType="CALLABLE">
-        {call GetPatBaseInfo(#{regNo,mode=IN},"regNo")}
+        {call framework_procedure.PatBase_GetPatBaseInfo(#{regNo,mode=IN},"regNo")}
     </select>
 
     <select id="getPatientByEposideId" resultMap="patient" parameterType="string" statementType="CALLABLE">
-        {call GetPatBaseInfo(#{eposideId,mode=IN},"admId")}
+        {call framework_procedure.PatBase_GetPatBaseInfo(#{eposideId,mode=IN},"admId")}
     </select>
 
     <select id="getPatientByMedCareNo" resultMap="patient" parameterType="string" statementType="CALLABLE">
-        {call GetPatBaseInfo(#{medCareNo,mode=IN},"medCareNo")}
+        {call framework_procedure.PatBase_GetPatBaseInfo(#{medCareNo,mode=IN},"medCareNo")}
     </select>
 
 </mapper>

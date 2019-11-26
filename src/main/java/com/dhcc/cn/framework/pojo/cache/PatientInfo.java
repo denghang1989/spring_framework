@@ -11,7 +11,7 @@ public class PatientInfo {
 
     private String patId;                           // 患者Id
 
-    private String regNo;                           // 登记号
+    private String patRegNo;                           // 登记号
 
     private String patName;                         // 姓名
 
@@ -28,5 +28,9 @@ public class PatientInfo {
     private String patAddr;                         // 联系地址
 
     private String patIDNo;                         // 身份证号
+
+    private String patNation;                       // 民族
+
+    private String patOccupation;                   // 职业
 
 }

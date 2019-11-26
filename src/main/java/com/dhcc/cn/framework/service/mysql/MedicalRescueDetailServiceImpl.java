@@ -74,11 +74,11 @@ public class MedicalRescueDetailServiceImpl {
     }
 
     @DataChanged(value = TopicEmum.UPDATE,topic = "MedicalRescueDetail")
-    public int update(MedicalRescueDetailForm medicalRescueDetailForm) {
+    public long update(MedicalRescueDetailForm medicalRescueDetailForm) {
         MedicalRescueDetail medicalRescueDetail = new MedicalRescueDetail();
         BeanUtils.copyProperties(medicalRescueDetailForm, medicalRescueDetail);
         int update = mMapper.updateById(medicalRescueDetail);
-        return update;
+        return medicalRescueDetail.getId();
     }
 
     public int delete(long id) {

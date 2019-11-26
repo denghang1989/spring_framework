@@ -182,6 +182,7 @@
 
         <input class="easyui-textbox" name="createUser" id="createUser" data-options="cls:'hidden'"  th:value="${userId}" />
         <input class="easyui-textbox" name="mainId" id="mainId" data-options="cls:'hidden'"  th:value="${rescue.id}" />
+        <!--<input class="easyui-textbox" name="id" id="id" data-options="cls:'hidden'"  th:value="${rescue.id}" />-->
     </form>
 
     <table id="detailList" class="easyui-datagrid" title="事件伤病员院内救治情况表" style="height:600px"
@@ -190,7 +191,7 @@
         <tr>
             <th data-options="field:'patName',width:80,align:'center'">姓名</th>
             <th data-options="field:'patSex',width:60,align:'center'">性别</th>
-            <th data-options="field:'patAge',width:50,align:'center'">年龄</th>
+            <th data-options="field:'patAge',width:80,align:'center'">年龄</th>
             <th data-options="field:'patNation',width:80,align:'center'">民族</th>
             <th data-options="field:'patOccupation',width:120,align:'center'">职业</th>
             <th data-options="field:'patDiag',width:200,align:'center'">初步诊断</th>
@@ -244,8 +245,21 @@
     }
 
     function submitForm(){
+
+        var url="";
+        if($("#mainId").val()>0){
+            url="/MedicalRescue/update";
+        }else{
+            url="/MedicalRescue/save";
+        }
+
         $('#rescue').form('submit',{
-            url:"/MedicalRescue/save",
+            url:url,
+            onSubmit: function(param){
+                if($("#mainId").val()>0){
+                    param.id = $("#mainId").val();
+                }
+            },
             success:function(data){
                 var data = eval('(' + data + ')');
                 if(data.code==0){
@@ -280,11 +294,9 @@
     
     function addDetail() {
 
-        //var top=$("#search").offset().top;
-        //var left=$("#search").offset().left;
-
+        //var url="/MedicalRescueDetail/rescue/detail?rescueId="+$("#id").val();
         var url="/MedicalRescueDetail/rescue/detail?rescueId="+$("#mainId").val();
-        //window.open(url,"detail","toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbar=yes,resizable=no,height=550,width=700,top=50,left=450")
+        //window.open(url,"detail","toolbar=no,location=no,directories=no,status=yes,menubar=no,scrollbar=yes,resizable=no,height=550,width=1000,top=50,left=200")
 
         $('#detail-dailog').dialog({
             title: '宝安区突发事件伤病员院内救治情况',
@@ -324,7 +336,10 @@
             closed: false,
             cache: false,
             href: url,
-            modal: true
+            modal: true,
+            onClose: function () {
+                rescueDetailLoad();
+            }
         });
     }
 

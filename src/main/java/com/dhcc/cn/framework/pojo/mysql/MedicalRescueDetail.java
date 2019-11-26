@@ -29,7 +29,7 @@ public class MedicalRescueDetail implements Serializable {
     private String patSex;
 
     @TableField("pat_age")
-    private long patAge;
+    private String patAge;
 
     @TableField("pat_nation")
     private String patNation;
@@ -54,5 +54,8 @@ public class MedicalRescueDetail implements Serializable {
 
     @TableField("pat_trans")
     private String patTrans;
+
+    @TableField("pat_regNo")
+    private String patRegNo;
 
 }
