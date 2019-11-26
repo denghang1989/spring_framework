@@ -11,6 +11,6 @@ public class ScheduleTaskConfig {
 
     @Scheduled(fixedDelay = 5000)
     public void task() {
-        log.info("1111");
+//        log.info("1111");
     }
 }
