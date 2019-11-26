@@ -57,6 +57,13 @@ public class MedicalRescueDetailController {
         return mService.insert(form);
     }
 
+    @PostMapping("/update")
+    @ResponseBody
+    @ResponseResultBody
+    public int update(MedicalRescueDetailForm form){
+        return mService.update(form);
+    }
+
     @GetMapping("/remove/{id}")
     @ResponseResultBody
     @ResponseBody

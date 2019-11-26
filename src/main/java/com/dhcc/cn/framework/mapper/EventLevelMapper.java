@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EventLevelMapper extends BaseMapper<EventLevel> {
+
     String findEventLeverById(@Param("id") long id);
 
 }

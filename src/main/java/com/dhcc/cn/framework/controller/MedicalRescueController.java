@@ -108,4 +108,11 @@ public class MedicalRescueController {
         return medicalRescueVos;
     }
 
+    @PostMapping("/update")
+    @ResponseResultBody
+    @ResponseBody
+    public int update(MedicalRescueForm form){
+        return mService.update(form);
+    }
+
 }

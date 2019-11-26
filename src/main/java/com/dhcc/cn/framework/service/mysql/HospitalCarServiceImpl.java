@@ -49,7 +49,6 @@ public class HospitalCarServiceImpl {
      * @param form
      * @return
      */
-    @DataChanged(topic = "HospitalCar", value = TopicEmum.INSERT)
     public int insert(HospitalCarForm form) {
         HospitalCar car = new HospitalCar() {{
             setCreateDate(new Date(System.currentTimeMillis()));

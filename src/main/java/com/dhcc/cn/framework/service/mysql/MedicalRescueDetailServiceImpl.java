@@ -1,7 +1,9 @@
 package com.dhcc.cn.framework.service.mysql;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.dhcc.cn.framework.annotation.DataChanged;
 import com.dhcc.cn.framework.dto.MedicalRescueDetailForm;
+import com.dhcc.cn.framework.enums.TopicEmum;
 import com.dhcc.cn.framework.mapper.MedicalRescueDetailMapper;
 import com.dhcc.cn.framework.pojo.mysql.MedicalRescueDetail;
 
@@ -63,6 +65,7 @@ public class MedicalRescueDetailServiceImpl {
         return form;
     }
 
+    @DataChanged(value = TopicEmum.INSERT,topic = "MedicalRescueDetail")
     public Long insert(MedicalRescueDetailForm medicalRescueDetailForm) {
         MedicalRescueDetail medicalRescueDetail = new MedicalRescueDetail();
         BeanUtils.copyProperties(medicalRescueDetailForm, medicalRescueDetail);
@@ -70,6 +73,7 @@ public class MedicalRescueDetailServiceImpl {
         return medicalRescueDetail.getId();
     }
 
+    @DataChanged(value = TopicEmum.UPDATE,topic = "MedicalRescueDetail")
     public int update(MedicalRescueDetailForm medicalRescueDetailForm) {
         MedicalRescueDetail medicalRescueDetail = new MedicalRescueDetail();
         BeanUtils.copyProperties(medicalRescueDetailForm, medicalRescueDetail);

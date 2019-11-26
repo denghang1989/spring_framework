@@ -3,7 +3,9 @@ package com.dhcc.cn.framework.service.mysql;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dhcc.cn.framework.annotation.DataChanged;
 import com.dhcc.cn.framework.dto.MedicalRescueForm;
+import com.dhcc.cn.framework.enums.TopicEmum;
 import com.dhcc.cn.framework.mapper.MedicalRescueMapper;
 import com.dhcc.cn.framework.pojo.mysql.MedicalRescue;
 import com.dhcc.cn.framework.vo.MedicalRescueVo;
@@ -25,12 +27,20 @@ public class MedicalRescueServiceImpl {
     @Autowired
     MedicalRescueMapper mMapper;
 
+    @DataChanged(value = TopicEmum.INSERT,topic = "MedicalRescue")
     public Long insert(MedicalRescueForm medicalRescueForm){
         MedicalRescue medicalRescue = new MedicalRescue();
         medicalRescue.setCreateDatetime(new Date());
         BeanUtils.copyProperties(medicalRescueForm,medicalRescue);
         int insert = mMapper.insert(medicalRescue);
         return medicalRescue.getId();
+    }
+
+    @DataChanged(value = TopicEmum.UPDATE,topic = "MedicalRescue")
+    public int update(MedicalRescueForm medicalRescueForm){
+        MedicalRescue medicalRescue = new MedicalRescue();
+        BeanUtils.copyProperties(medicalRescueForm,medicalRescue);
+        return mMapper.updateById(medicalRescue);
     }
 
     public MedicalRescueForm selectById(int id){
