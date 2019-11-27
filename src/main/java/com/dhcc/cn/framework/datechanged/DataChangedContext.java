@@ -3,6 +3,7 @@ package com.dhcc.cn.framework.datechanged;
 
 import com.dhcc.cn.framework.enums.TopicEmum;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -14,17 +15,23 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DataChangedContext {
 
+    @Autowired
+    MedicalRescueDetailImpl mMedicalRescueDetail;
+
+    @Autowired
+    MedicalRescueImpl mMedicalRescue;
+
     public DataChangedInterface getInstance(String topic) {
         DataChangedInterface dataChangedInterface = null;
         switch (topic) {
             case "MedicalRescueDetail":
-                dataChangedInterface = new MedicalRescueDetailImpl();
+                dataChangedInterface = mMedicalRescueDetail;
                 break;
             case "MedicalRescue":
-                dataChangedInterface = new MedicalRescueImpl();
+                dataChangedInterface = mMedicalRescue;
                 break;
             default:
-                dataChangedInterface = new MedicalRescueDetailImpl();
+                dataChangedInterface = mMedicalRescueDetail;
                 break;
         }
         return dataChangedInterface;
