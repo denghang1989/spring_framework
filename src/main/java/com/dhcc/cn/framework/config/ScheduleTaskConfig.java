@@ -41,7 +41,6 @@ public class ScheduleTaskConfig {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
                 Token body = response.body();
-                log.info(body.toString());
                 mStorage.setAccessToken(body.getAccess_token());
             }
 
