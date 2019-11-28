@@ -40,3 +40,17 @@ mybatis-plus:
 logging:
   level:
     com.dhcc.cn.framework.mapper: DEBUG
+
+constant:
+  hospital: "宝安区人民医院"
+
+wx:
+  baseUrl: https://api.weixin.qq.com/
+  templateId: 4tMLlBbhIP6NYMOHsrCrfZ5qjRWZWIDI-_MPEuWAWkw
+  mp:
+    app-id: wxefeac67815aedb20
+    config-storage:
+      type: memory
+    token: 111
+    secret: c4c38291d4cf613a8ef8d8c72a670488
+    aes-key: 111
