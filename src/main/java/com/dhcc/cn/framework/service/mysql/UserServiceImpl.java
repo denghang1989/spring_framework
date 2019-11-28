@@ -1,7 +1,6 @@
 package com.dhcc.cn.framework.service.mysql;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dhcc.cn.framework.config.JwtConfig;
 import com.dhcc.cn.framework.dto.UserInfo;
 import com.dhcc.cn.framework.mapper.UserMapper;
@@ -25,10 +24,10 @@ public class UserServiceImpl {
 
     public Optional<UserInfo> getUser(String name, String psw) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(User::getLoginName, name).eq(User::getPassword, psw);
+        queryWrapper.lambda().eq(User::getUserCode, name).eq(User::getPassword, psw);
         User user = mUserMapper.selectOne(queryWrapper);
         if (user != null) {
-            String token = jwtConfig.getToken(user.getLoginName() + user.getPassword());
+            String token = jwtConfig.getToken(user.getUserName() + user.getPassword());
             UserInfo userInfo = new UserInfo() {{
                 setToken(token);
             }};
@@ -37,7 +36,19 @@ public class UserServiceImpl {
         } else {
             return Optional.empty();
         }
-
     }
+
+    public Optional<User> getUser(long id){
+        User user = mUserMapper.selectById(id);
+        return Optional.ofNullable(user);
+    }
+
+    public Optional<User> getUser(String userCode){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(User::getUserCode,userCode);
+        User user = mUserMapper.selectOne(queryWrapper);
+        return Optional.ofNullable(user);
+    }
+
 
 }

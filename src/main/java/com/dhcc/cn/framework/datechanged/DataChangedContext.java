@@ -37,7 +37,7 @@ public class DataChangedContext {
         return dataChangedInterface;
     }
 
-    public void handleTopic(DataChangedInterface dataChangedInterface, TopicEmum topicEmum, Object object) {
+    public void handleTopic(DataChangedInterface dataChangedInterface, TopicEmum topicEmum, Long object) {
         switch (topicEmum) {
             case INSERT:
                 dataChangedInterface.handleInsert(object);

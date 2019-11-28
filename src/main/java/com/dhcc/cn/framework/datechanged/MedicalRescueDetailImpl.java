@@ -1,6 +1,5 @@
 package com.dhcc.cn.framework.datechanged;
 
-import com.dhcc.cn.framework.dto.MedicalRescueDetailForm;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -8,16 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-class MedicalRescueDetailImpl implements DataChangedInterface<MedicalRescueDetailForm> {
+class MedicalRescueDetailImpl implements DataChangedInterface<Long> {
 
     @Override
-    public void handleInsert(MedicalRescueDetailForm medicalRescueDetailForm) {
+    public void handleInsert(Long aLong) {
 
     }
 
     @Override
-    public void handleUpdate(MedicalRescueDetailForm medicalRescueDetailForm) {
+    public void handleUpdate(Long aLong) {
 
     }
-
 }

@@ -45,8 +45,6 @@ public class DataChangedAspect {
     @AfterReturning(returning = "ret", pointcut = "annotationPointcut()")
     public void handleDataChanged(JoinPoint joinPoint, Object ret) throws Throwable {
         MethodSignature sign = (MethodSignature) joinPoint.getSignature();
-        Object[] args = joinPoint.getArgs();
-        log.debug(args[0].toString());
         if (ret instanceof Number) {
             if ((Long) ret > 0) {
                 Method method = sign.getMethod();
@@ -54,7 +52,7 @@ public class DataChangedAspect {
                 String topic = dataChanged.topic();
                 TopicEmum topicEmum = dataChanged.value();
                 DataChangedInterface instance = mContext.getInstance(topic);
-                mContext.handleTopic(instance, topicEmum, args[0]);
+                mContext.handleTopic(instance, topicEmum, (Long) ret);
             }
         }
     }
