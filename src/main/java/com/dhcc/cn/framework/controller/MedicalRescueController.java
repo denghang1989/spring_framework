@@ -1,12 +1,14 @@
 package com.dhcc.cn.framework.controller;
 
 import com.dhcc.cn.framework.annotation.ResponseResultBody;
+import com.dhcc.cn.framework.config.ConstantConfig;
 import com.dhcc.cn.framework.dto.MedicalRescueForm;
 import com.dhcc.cn.framework.dto.result.DataGridResult;
 import com.dhcc.cn.framework.mapper.EventLevelMapper;
 import com.dhcc.cn.framework.mapper.EventTypeMapper;
 import com.dhcc.cn.framework.pojo.mysql.EventLevel;
 import com.dhcc.cn.framework.pojo.mysql.EventType;
+import com.dhcc.cn.framework.service.cache.CacheUserServiceImpl;
 import com.dhcc.cn.framework.service.mysql.MedicalRescueServiceImpl;
 import com.dhcc.cn.framework.vo.MedicalRescueVo;
 
@@ -32,11 +34,21 @@ public class MedicalRescueController {
     @Autowired
     EventTypeMapper mEventTypeMapper;
 
+    @Autowired
+    CacheUserServiceImpl mCacheService;
+
+    @Autowired
+    ConstantConfig constant;
+
     @GetMapping("/rescue/index")
     public String medicalRescue(@RequestParam String userId, String rescueId, Model model){
         MedicalRescueForm rescueForm;
+        String userName=mCacheService.getCacheUserById(userId).getName();
         if(StringUtils.isEmpty(rescueId)){
             rescueForm=new MedicalRescueForm();
+            rescueForm.setReporter(userName);
+            rescueForm.setOrganization(constant.getHospital());
+            rescueForm.setReportDatetime(new Date());
         }else{
             rescueForm=getMedicalRescueById(Integer.valueOf(rescueId));
         }
