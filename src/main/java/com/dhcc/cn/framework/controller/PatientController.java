@@ -1,9 +1,7 @@
 package com.dhcc.cn.framework.controller;
 
 import com.dhcc.cn.framework.annotation.ResponseResultBody;
-import com.dhcc.cn.framework.pojo.cache.EposideInfo;
 import com.dhcc.cn.framework.pojo.cache.PatientInfo;
-import com.dhcc.cn.framework.service.cache.EposideServiceImpl;
 import com.dhcc.cn.framework.service.cache.PatientServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,6 @@ public class PatientController {
     
     @Autowired
     PatientServiceImpl mService;
-
-    @Autowired
-    EposideServiceImpl mEposideService;
 
     /**
      * @param patientId pa_patmas_id
@@ -58,14 +53,5 @@ public class PatientController {
     @GetMapping("/medCareNo/{medCareNo}")
     PatientInfo getPatientByMedCareNo(@PathVariable("medCareNo") String medCareNo) {
         return mService.getPatientByMedCareNo(medCareNo);
-    }
-
-    /**
-     * @param regNo 登记号
-     * @return
-     */
-    @GetMapping("/admInfo/{regNo}")
-    EposideInfo getEposideInfoByRegNo(@PathVariable("regNo") String regNo) {
-        return mEposideService.getEposideInfoByRegNo(regNo);
     }
 }

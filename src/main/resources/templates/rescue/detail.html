@@ -25,6 +25,8 @@
             font-size: 16px;
         }
 
+        form.
+
     </style>
 
 </head>
@@ -59,15 +61,12 @@
         </div>
 
         <div>
+            <label class="textbox-label" for="patDiag" style="text-align: left;width: 90px;">初步诊断：</label>
+            <input class="easyui-textbox" name="patDiag" id="patDiag" style="width:190px" th:value="${detail.patDiag}" />
 
             <label class="textbox-label" for="patAdmloc" style="text-align: left;width: 90px;">收治科室：</label>
             <input class="easyui-textbox" name="patAdmloc" id="patAdmloc" style="width:120px" th:value="${detail.patAdmloc}" />
 
-            <label class="textbox-label" for="patDiag" style="text-align: left;width: 90px;">初步诊断：</label>
-            <input class="easyui-textbox" name="patDiag" id="patDiag" style="width:400px" th:value="${detail.patDiag}" />
-        </div>
-
-        <div>
             <label class="textbox-label" for="patLevel" style="text-align: left;width: 90px;">病情分级：</label>
             <select class="easyui-combobox" name="patLevel" id="patLevel" style="width:90px" th:sel="${detail.patLevel}" >
                 <option value=""></option>
@@ -82,15 +81,17 @@
                 <option value="平稳">平稳</option>
                 <option value="不平稳">不平稳</option>
             </select>
+
         </div>
 
         <div>
             <label class="textbox-label" for="patConsult" style="text-align: left;width: 90px;">会诊专家：</label>
             <input class="easyui-textbox" name="patConsult" id="patConsult" style="width:300px" th:value="${detail.patConsult}" />
+        </div>
 
+        <div>
             <label class="textbox-label" for="patTrans" style="text-align: left;width: 150px;">拟转医院及科室：</label>
             <input class="easyui-textbox" name="patTrans" id="patTrans" style="width:300px" th:value="${detail.patTrans}" />
-
         </div>
 
         <div>
@@ -123,8 +124,7 @@
         });
 
         function getPatInfo() {
-            //$.get("/patient/regNo/"+$("#patRegNo").val(),function (ret) {
-            $.get("/patient/admInfo/"+$("#patRegNo").val(),function (ret) {
+            $.get("/patient/regNo/"+$("#patRegNo").val(),function (ret) {
 
                 if(ret.code==0){
 
@@ -134,9 +134,8 @@
                     $("#patAge").textbox("setValue",ret.data.patAge);
                     $("#patNation").textbox("setValue",ret.data.patNation);
                     $("#patOccupation").textbox("setValue",ret.data.patOccupation);
-                    $("#patDiag").textbox("setValue",ret.data.admDiag);
-                    $("#patAdmloc").textbox("setValue",ret.data.admLoc);
-                    $("#paadmId").textbox("setValue",ret.data.admId);
+                    /* $("#patDiag").val(ret.data.patDiag);
+                     $("#patAdmloc").val(ret.data.patAdmloc);*/
 
                 }else{
                     $.messager.show({

@@ -1,12 +1,6 @@
 package com.dhcc.cn.framework.pojo.cache;
 
-import lombok.Data;
-
-/**
-* @description: 病人就诊信息
-*/
-@Data
-public class EposideInfo extends PatientInfo{
+public class EposideInfo {
 
     private String admId;                       // 就诊记录Id
 

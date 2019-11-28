@@ -10,7 +10,7 @@
     <link th:href="@{/easyui/themes/default/easyui.css}" rel="stylesheet" type="text/css"/>                 <!-- easyui核心UI文件 css -->
     <link th:href="@{/easyui/themes/icon.css}" rel="stylesheet" type="text/css"/>                           <!-- easyui图标 -->
     <script th:src="@{/easyui/locale/easyui-lang-zh_CN.js}" type="text/javascript" charset="utf-8"></script>
-    <script th:src="@{/js/validate.js}" type="text/javascript" charset="utf-8"></script>
+
 
     <style>
 
@@ -61,11 +61,11 @@
 
         <div>
             <label class="textbox-label" for="reporter" style="text-align: left;width: 100px;">报告人：</label>
-            <input class="easyui-textbox" name="reporter" id="reporter" style="width:120px" th:value="${rescue.reporter}" data-options="required:true" />
+            <input class="easyui-textbox" name="reporter" id="reporter" style="width:180px" th:value="${rescue.reporter}" data-options="required:true" />
             <label class="textbox-label" for="phone" style="text-align: left;width: 70px;margin-left: 50px;">手机：</label>
-            <input class="easyui-textbox" name="phone" id="phone" style="width:150px" data-options="validType:'phoneNum'" th:value="${rescue.phone}" />
+            <input class="easyui-textbox" name="phone" id="phone" style="width:150px" th:value="${rescue.phone}" />
             <label class="textbox-label" for="approver" style="text-align: left;width: 120px;margin-left: 50px;">审核院领导：</label>
-            <input class="easyui-textbox" name="approver" id="approver" style="width:120px" th:value="${rescue.approver}" />
+            <input class="easyui-textbox" name="approver" id="approver" style="width:150px" th:value="${rescue.approver}" />
         </div>
 
         <div>
@@ -194,7 +194,7 @@
             <th data-options="field:'patAge',width:80,align:'center'">年龄</th>
             <th data-options="field:'patNation',width:80,align:'center'">民族</th>
             <th data-options="field:'patOccupation',width:120,align:'center'">职业</th>
-            <th data-options="field:'patDiag',width:300,align:'center'">初步诊断</th>
+            <th data-options="field:'patDiag',width:200,align:'center'">初步诊断</th>
             <th data-options="field:'patAdmloc',width:150,align:'center'">收治科室</th>
             <th data-options="field:'patLevel',width:80,align:'center'">病情分级</th>
             <th data-options="field:'patReturn',width:80,align:'center'">转归情况</th>
@@ -259,7 +259,6 @@
                 if($("#mainId").val()>0){
                     param.id = $("#mainId").val();
                 }
-                return $("#rescue").form('validate');
             },
             success:function(data){
                 var data = eval('(' + data + ')');
