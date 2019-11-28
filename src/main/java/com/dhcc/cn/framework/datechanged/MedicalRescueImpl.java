@@ -33,9 +33,10 @@ public class MedicalRescueImpl implements DataChangedInterface<Long> {
             @Override
             public void accept(DataChangedVo dataChangedVo) {
                 //1,模板数据
-                WxMpTemplateData wxMpTemplateData = new WxMpTemplateData();
-                wxMpTemplateData.setName(dataChangedVo.getApproverName());
-                wxMpTemplateData.setValue(dataChangedVo.getEventDesc());
+                WxMpTemplateData first = new WxMpTemplateData();
+                first.setName(dataChangedVo.getApproverName());
+                first.setValue(dataChangedVo.getEventDesc());
+                first.setColor("#173177");
 
                 //2,推送消息
                 WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
@@ -43,7 +44,7 @@ public class MedicalRescueImpl implements DataChangedInterface<Long> {
                         .templateId(Setting.templateId)//模版id
                         .url("https://www.baidu.com/")//点击模版消息要访问的网址
                         .build();
-                templateMessage.addData(wxMpTemplateData);
+                templateMessage.addData(first);
                 try {
                     mWxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
                 } catch (Exception e) {

@@ -43,9 +43,16 @@ public class UserServiceImpl {
         return Optional.ofNullable(user);
     }
 
-    public Optional<User> getUser(String userCode){
+    public Optional<User> getUserByCode(String userCode){
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.lambda().eq(User::getUserCode,userCode);
+        User user = mUserMapper.selectOne(queryWrapper);
+        return Optional.ofNullable(user);
+    }
+
+    public Optional<User> getUserByMobile(String mobile){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(User::getMobile,mobile);
         User user = mUserMapper.selectOne(queryWrapper);
         return Optional.ofNullable(user);
     }
