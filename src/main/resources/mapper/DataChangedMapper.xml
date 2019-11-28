@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.cn.framework.mapper.DataChangedMapper">
+
+    <resultMap id="DataChangedVo" type="com.dhcc.cn.framework.vo.DataChangedVo">
+        <id column="id" property="id"/>
+        <result column="organization" property="organization"/>
+        <result column="report_datetime" property="reportDatetime"/>
+        <result column="reporter" property="reporter"/>
+        <result column="phone" property="phone"/>
+        <result column="approver" property="approver"/>
+        <result column="occurrence_datetime" property="occurrenceDatetime"/>
+        <result column="Occurrence_address" property="occurrenceAddress"/>
+        <result column="paadm_datetime" property="paadmDatetime"/>
+        <result column="event_desc" property="eventDesc"/>
+        <result column="total_number" property="totalNumber"/>
+        <result column="mild_number" property="mildNumber"/>
+        <result column="severe_number" property="severeNumber"/>
+        <result column="critically_number" property="critically_Number"/>
+        <result column="death_number" property="deathNumber"/>
+        <result column="event_trend" property="eventTrend"/>
+        <result column="event_enlargement" property="eventEnlargement"/>
+        <result column="ambulance_number" property="ambulanceNumber"/>
+        <result column="doctor_number" property="doctorNumber"/>
+        <result column="nurser_number" property="nurserNumber"/>
+        <result column="driver_number" property="driverNumber"/>
+        <result column="consultation" property="otherWays"/>
+        <result column="consultation" property="consultation"/>
+        <result column="reinforce" property="reinforce"/>
+        <result column="additional_resources" property="additionalResources"/>
+        <result column="create_user" property="createUser"/>
+        <result property="eventTypeName" column="event_type_name"  />
+        <result property="eventLevelName" column="event_level_name" />
+        <result column="approver_name" property="approverName"/>
+        <result column="openId" property="openId"/>
+    </resultMap>
+
+    <select id="getDataChangedInfo" resultMap="DataChangedVo" parameterType="long">
+        SELECT
+          *,event_level.name as event_level_name,
+               event_type.name as event_type_name,
+               user.user_name as approver_name,
+               user.openId as openId,
+        FROM
+          medical_rescue
+        left join event_level on medical_rescue.event_level = event_level.id
+        left join event_type on medical_rescue.event_type = event_type.id
+        left join user on medical_rescue.approver = user.id
+        where
+          medical_rescue.id=#{id}
+    </select>
+</mapper>

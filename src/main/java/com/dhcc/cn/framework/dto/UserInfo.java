@@ -8,9 +8,9 @@ public class UserInfo {
     private long   id;
     private String userName;
     private String email;
-    private String address;
-    private String loginName;
     private String mobile;
     private String token;
-
+    private String userCode;
+    private String openId;
+    private long hospitalId;
 }
