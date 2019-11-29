@@ -46,11 +46,11 @@ constant:
 
 wx:
   baseUrl: https://api.weixin.qq.com/
-  templateId: 4tMLlBbhIP6NYMOHsrCrfZ5qjRWZWIDI-_MPEuWAWkw
+  templateId: 9wwYS047AuogDQ0t-e3uyZGBuANdFTvEzxb6ajyw33k
   mp:
-    app-id: wxefeac67815aedb20
+    app-id: wx103f6f5f49774b91
     config-storage:
       type: memory
     token: 111
-    secret: c4c38291d4cf613a8ef8d8c72a670488
+    secret: 2b20ba9b18def650ec45ab2b649e3094
     aes-key: 111

@@ -27,6 +27,7 @@ public class MedicalRescueImpl implements DataChangedInterface<Long> {
 
     @Override
     public void handleInsert(Long ret) {
+        log.info("MedicalRescueImpl:"+ret);
         //需要审批的审核院领导
         Optional<DataChangedVo> optional = mDataChangedService.getDataChangedInfo(ret);
         optional.ifPresent(new Consumer<DataChangedVo>() {

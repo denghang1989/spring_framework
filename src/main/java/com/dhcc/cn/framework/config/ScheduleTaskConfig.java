@@ -34,13 +34,14 @@ public class ScheduleTaskConfig {
     private String appSecret;
 
 
-    @Scheduled(fixedDelay = 7200)
+    @Scheduled(fixedDelay = 3600000)
     public void task() {
         Call<Token> call = mWxApi.getToken("client_credential", appId, appSecret);
         call.enqueue(new Callback<Token>() {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
                 Token body = response.body();
+                log.info(body.getAccess_token());
                 mStorage.setAccessToken(body.getAccess_token());
             }
 

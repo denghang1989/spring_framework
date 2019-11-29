@@ -41,7 +41,7 @@
           *,event_level.name as event_level_name,
                event_type.name as event_type_name,
                user.user_name as approver_name,
-               user.openId as openId,
+               user.openId as openId
         FROM
           medical_rescue
         left join event_level on medical_rescue.event_level = event_level.id
