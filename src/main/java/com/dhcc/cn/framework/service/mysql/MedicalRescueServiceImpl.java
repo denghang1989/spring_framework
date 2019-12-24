@@ -29,18 +29,14 @@ public class MedicalRescueServiceImpl {
 
     @DataChanged(value = TopicEmum.INSERT,topic = "MedicalRescue")
     public Long insert(MedicalRescueForm medicalRescueForm){
-        MedicalRescue medicalRescue = new MedicalRescue();
-        medicalRescue.setCreateDatetime(new Date());
-        BeanUtils.copyProperties(medicalRescueForm,medicalRescue);
+        MedicalRescue medicalRescue = medicalRescueForm.convertForMedicalRescue();
         int insert = mMapper.insert(medicalRescue);
         return medicalRescue.getId();
     }
 
     @DataChanged(value = TopicEmum.UPDATE,topic = "MedicalRescue")
     public long update(MedicalRescueForm medicalRescueForm){
-        MedicalRescue medicalRescue = new MedicalRescue();
-        BeanUtils.copyProperties(medicalRescueForm,medicalRescue);
-        //return mMapper.updateById(medicalRescue);
+        MedicalRescue medicalRescue = medicalRescueForm.convertForMedicalRescue();
         int update = mMapper.updateById(medicalRescue);
         return medicalRescue.getId();
     }
@@ -48,7 +44,7 @@ public class MedicalRescueServiceImpl {
     public MedicalRescueForm selectById(int id){
         MedicalRescue medicalRescue = mMapper.selectById(id);
         MedicalRescueForm rescueForm = new MedicalRescueForm();
-        BeanUtils.copyProperties(medicalRescue,rescueForm);
+        rescueForm.convertToMedicalRescueForm(medicalRescue);
         return rescueForm;
     }
 

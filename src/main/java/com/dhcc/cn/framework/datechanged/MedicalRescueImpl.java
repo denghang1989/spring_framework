@@ -1,7 +1,7 @@
 package com.dhcc.cn.framework.datechanged;
 
+import com.dhcc.cn.framework.config.WxConstantConfig;
 import com.dhcc.cn.framework.service.mysql.DataChangedServiceImpl;
-import com.dhcc.cn.framework.utlis.Setting;
 import com.dhcc.cn.framework.vo.DataChangedVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,9 @@ public class MedicalRescueImpl implements DataChangedInterface<Long> {
     @Autowired
     DataChangedServiceImpl mDataChangedService;
 
+    @Autowired
+    WxConstantConfig mWxConstantConfig;
+
     @Override
     public void handleInsert(Long ret) {
         log.info("MedicalRescueImpl:"+ret);
@@ -42,7 +45,7 @@ public class MedicalRescueImpl implements DataChangedInterface<Long> {
                 //2,推送消息
                 WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                         .toUser(dataChangedVo.getOpenId())//要推送的用户openid
-                        .templateId(Setting.templateId)//模版id
+                        .templateId(mWxConstantConfig.getTemplateId())//模版id
                         .url("https://www.baidu.com/")//点击模版消息要访问的网址
                         .build();
                 templateMessage.addData(first);
